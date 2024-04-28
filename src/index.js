@@ -1,17 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import ProjetosPage from "./pages/ProjetosPage";
+import ConsensoPage from "./pages/ConsensoPage";
+import SociosPage from "./pages/SociosPage";
+import FinanceiroPage from "./pages/FinanceiroPage";
+import CarteiraPage from "./pages/CarteiraPage";
+import AtividadesPage from "./pages/AtividadesPage";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route
+          path="/auth/*"
+          element={
+            <>
+              <Header />
+              <Routes>
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/carteira" element={<CarteiraPage />} />
+                <Route path="/consenso" element={<ConsensoPage />} />
+                <Route path="/atividades" element={<AtividadesPage />} />
+                <Route path="/socios" element={<SociosPage />} />
+                <Route path="/financeiro" element={<FinanceiroPage />} />
+                <Route path="/projetos" element={<ProjetosPage />} />
+              </Routes>
+            </>
+          }
+        />
+      </Routes>
+    </Router>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
