@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { HandThumbsUp, HandThumbsDown } from "react-bootstrap-icons";
 
 const questions = [

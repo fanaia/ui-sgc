@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function CarteiraPage() {
   // Funções para lidar com a compra e venda de tokens vão aqui
