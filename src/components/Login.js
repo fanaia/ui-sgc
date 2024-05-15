@@ -1,54 +1,67 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import apiRetaguarda from "../config/apiRetaguarda";
 
-function Login() {
-  const [phoneNumber, setPhoneNumber] = useState("");
+const Login = () => {
+  const [msg, setMsg] = useState();
   const navigate = useNavigate();
 
-  const handleInputChange = (event) => {
-    setPhoneNumber(event.target.value);
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const handleLogin = () => {
-    // Implemente a lógica de login aqui
+    const whatsapp = event.target.whatsapp.value;
+    const senha = event.target.senha.value;
 
-    // Redirecionar para a página inicial
-    navigate("/auth/home");
-  };
+    try {
+      const response = await apiRetaguarda.post("/login", { whatsapp, senha });
+      const token = response.data.token;
 
-  const handleRegister = () => {
-    // Implemente a lógica de registro aqui
-  };
+      // Armazene o token no localStorage
+      localStorage.setItem("token", token);
 
-  const handleForgotAccess = () => {
-    // Implemente a lógica de recuperação de acesso aqui
+      navigate("/auth/carteira");
+    } catch (error) {
+      setMsg(error.message);
+      console.error("Falha na autenticação", error);
+      // Aqui você pode adicionar qualquer tratamento de erro que desejar
+    }
   };
 
   return (
-    <Form>
-      <FormGroup>
-        <Form.Control
-          type="tel"
-          name="phone"
-          id="phoneNumber"
-          placeholder="Telefone / WhatsApp"
-          value={phoneNumber}
-          onChange={handleInputChange}
-        />
-      </FormGroup>
-      <Button variant="primary" className="w-100 mb-3" onClick={handleLogin}>
-        Entrar
-      </Button>
-      <hr />
-      <Button variant="link" className="w-100" onClick={handleRegister}>
-        Criar novo cadastro
-      </Button>
-      <Button variant="link" className="w-100" onClick={handleForgotAccess}>
-        Perdi meu acesso
-      </Button>
-    </Form>
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card mt-5 shadow-lg">
+            <div className="card-body">
+              <h2 className="text-center mb-4">
+                SGC <br className="d-sm-none" /> Jussara
+              </h2>
+              <h3 className="text-center mb-4">Autenticação</h3>
+              {msg && (
+                <div className="alert alert-danger" role="alert">
+                  {JSON.stringify(msg)}
+                </div>
+              )}
+              <form onSubmit={handleSubmit}>
+                <div className="form-group mb-4">
+                  <label htmlFor="whatsapp">Whatsapp</label>
+                  <input type="whatsapp" id="whatsapp" name="whatsapp" className="form-control" />
+                </div>
+                <div className="form-group mb-4">
+                  <label htmlFor="senha">Senha</label>
+                  <input type="password" id="senha" name="senha" className="form-control" />
+                </div>
+                <button type="submit" className="btn btn-primary btn-block">
+                  Entrar
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default Login;

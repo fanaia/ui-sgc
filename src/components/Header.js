@@ -6,7 +6,7 @@ const Header = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <header>
+    <header style={{ marginBottom: '10px' }}>
       <Navbar
         bg="dark"
         variant="dark"
@@ -40,8 +40,8 @@ const Header = () => {
             <Nav.Link as={Link} to="/auth/projetos" onClick={() => setExpanded(false)}>
               Projetos
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth/socios" onClick={() => setExpanded(false)}>
-              Socios
+            <Nav.Link as={Link} to="/auth/participantes" onClick={() => setExpanded(false)}>
+              Participantes
             </Nav.Link>
             <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
               Sair

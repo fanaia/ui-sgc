@@ -8,9 +8,6 @@ function LoginPage() {
 
   return (
     <div>
-      <h1>SGC</h1>
-      <h2>Sistema de Gestão e Consenso</h2>
-      <hr />
       <Login />
     </div>
   );

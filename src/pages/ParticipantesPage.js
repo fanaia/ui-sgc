@@ -1,28 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Modal, Button, ButtonGroup } from "react-bootstrap";
-import projetoService from "../services/projetoService";
-import ProjetoEdit from "../components/ProjetoEdit";
+import participanteService from "../services/participanteService";
+import ParticipanteEdit from "../components/ParticipanteEdit";
 
-const ProjetosPage = () => {
+const ParticipantesPage = () => {
   const [msg, setMsg] = useState();
-  const [projetos, setProjetos] = useState([]);
+  const [participantes, setParticipantes] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [projetoIdToDelete, setProjetoIdToDelete] = useState(null);
+  const [participanteIdToDelete, setParticipanteIdToDelete] = useState(null);
 
-  const projetoEditRef = useRef();
+  const participanteEditRef = useRef();
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    projetoService.listProjetos().then((data) => setProjetos(data.map((item) => ({ ...item }))));
+    participanteService.listParticipantes().then((data) => setParticipantes(data.map((item) => ({ ...item }))));
   };
 
   const toggleAtivo = async (_id, value) => {
-    await projetoService.setAtivo(_id, value);
+    await participanteService.setAtivo(_id, value);
     fetchData();
   };
 
@@ -32,13 +32,13 @@ const ProjetosPage = () => {
   };
 
   const askForDeleteConfirmation = (_id) => {
-    setProjetoIdToDelete(_id);
+    setParticipanteIdToDelete(_id);
     setShowModal(false);
     setShowConfirmModal(true);
   };
 
   const handleDelete = () => {
-    projetoService.deleteProjeto(projetoIdToDelete).then((response) => {
+    participanteService.deleteParticipante(participanteIdToDelete).then((response) => {
       setShowModal(false);
       setMsg(response);
       fetchData();
@@ -52,7 +52,7 @@ const ProjetosPage = () => {
   };
 
   const handleSave = async () => {
-    const ret = await projetoEditRef.current.save();
+    const ret = await participanteEditRef.current.save();
     setShowModal(false);
     fetchData();
     setMsg(ret);
@@ -70,9 +70,9 @@ const ProjetosPage = () => {
             {JSON.stringify(msg.message)}
           </div>
         )}
-        <h1 className="my-4">Projetos</h1>
+        <h1 className="my-4">Participantes</h1>
         <Button onClick={handleAdd} className="btn btn-primary mb-3">
-          Adicionar Projeto
+          Adicionar Participante
         </Button>
         <table className="table table-striped">
           <thead>
@@ -83,27 +83,27 @@ const ProjetosPage = () => {
             </tr>
           </thead>
           <tbody>
-            {projetos.map((projeto) => (
-              <tr key={projeto._id}>
+            {participantes.map((participante) => (
+              <tr key={participante._id}>
                 <td>
                   <button
                     type="button"
                     className="btn btn-link"
-                    onClick={() => handleEdit(projeto._id)}
+                    onClick={() => handleEdit(participante._id)}
                   >
-                    {projeto.nome}
+                    {participante.nome}
                   </button>
                 </td>
                 <td className="d-none d-md-table-cell">
                   <Form.Check
                     type="switch"
-                    id={`ativo-${projeto._id}`}
-                    checked={projeto.ativo}
-                    onChange={() => toggleAtivo(projeto._id, !projeto.ativo)}
+                    id={`ativo-${participante._id}`}
+                    checked={participante.ativo}
+                    onChange={() => toggleAtivo(participante._id, !participante.ativo)}
                   />
                 </td>
                 <td className="d-none d-md-table-cell">
-                  <Button variant="danger" onClick={() => askForDeleteConfirmation(projeto._id)}>
+                  <Button variant="danger" onClick={() => askForDeleteConfirmation(participante._id)}>
                     Excluir
                   </Button>
                 </td>
@@ -114,10 +114,10 @@ const ProjetosPage = () => {
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>{selectedId > 0 ? "Alterar Projeto" : "Adicionar Projeto"}</Modal.Title>
+          <Modal.Title>{selectedId > 0 ? "Alterar Participante" : "Adicionar Participante"}</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
-          <ProjetoEdit ref={projetoEditRef} _id={selectedId} />
+          <ParticipanteEdit ref={participanteEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
           <ButtonGroup>
@@ -142,7 +142,7 @@ const ProjetosPage = () => {
         <Modal.Header closeButton>
           <Modal.Title>Confirmação de exclusão</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Tem certeza que deseja excluir este Projeto?</Modal.Body>
+        <Modal.Body>Tem certeza que deseja excluir este Participante?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
             Cancelar
@@ -156,4 +156,4 @@ const ProjetosPage = () => {
   );
 };
 
-export default ProjetosPage;
+export default ParticipantesPage;

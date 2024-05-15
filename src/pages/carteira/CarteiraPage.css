@@ -1,0 +1,10 @@
+.button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-button {
+  width: 100%;
+  height: 60px; /* Ajuste este valor para alterar a altura dos botões */
+  margin-bottom: 10px;
+}

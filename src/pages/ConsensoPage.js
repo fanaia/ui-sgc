@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Card, Button } from "react-bootstrap";
-import { HandThumbsUp, HandThumbsDown } from "react-bootstrap-icons";
+import { Card, Button, Container } from "react-bootstrap";
+import { HandThumbsUp, HandThumbsDown, HandThumbsUpFill } from "react-bootstrap-icons";
 
 const questions = [
   "Cadastro de Sócia: Fabio",
@@ -19,8 +19,25 @@ function ConsensoPage() {
   };
 
   return (
-    <div>
-      <h1>Consenso</h1>
+    <Container>
+      <h1 style={{ textAlign: "center" }}>
+        <HandThumbsUpFill size={32} style={{ marginRight: "10px" }} />
+        Consenso
+        <HandThumbsUpFill size={32} style={{ marginLeft: "10px" }} />
+      </h1>
+      <hr />
+      <Button variant="primary" className="flex-grow-1 me-1" style={{ width: "100%" }}>
+        Criar Votação
+      </Button>
+      <hr />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button variant="warning" className="flex-grow-1 me-1" style={{ width: "50%" }}>
+          Votar
+        </Button>
+        <Button variant="secondary" className="flex-grow-1 mx-1" style={{ width: "50%" }}>
+          Encerrados
+        </Button>
+      </div>
       <hr />
       {questions.map((question, index) => (
         <Card
@@ -57,7 +74,7 @@ function ConsensoPage() {
           </Card.Body>
         </Card>
       ))}
-    </div>
+    </Container>
   );
 }
 
