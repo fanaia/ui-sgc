@@ -40,6 +40,9 @@ const Header = () => {
             <Nav.Link as={Link} to="/auth/projetos" onClick={() => setExpanded(false)}>
               Projetos
             </Nav.Link>
+            <Nav.Link as={Link} to="/auth/grupos-trabalho" onClick={() => setExpanded(false)}>
+              Grupos de Trabalho
+            </Nav.Link>
             <Nav.Link as={Link} to="/auth/participantes" onClick={() => setExpanded(false)}>
               Participantes
             </Nav.Link>

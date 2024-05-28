@@ -11,6 +11,7 @@ import ParticipantesPage from "./pages/ParticipantesPage";
 import FinanceiroPage from "./pages/FinanceiroPage";
 import CarteiraPage from "./pages/carteira/CarteiraPage";
 import AtividadesPage from "./pages/AtividadesPage";
+import GruposTrabalhoPage from "./pages/GruposTrabalhoPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -30,6 +31,7 @@ root.render(
                 <Route path="/atividades" element={<AtividadesPage />} />
                 <Route path="/participantes" element={<ParticipantesPage />} />
                 <Route path="/financeiro" element={<FinanceiroPage />} />
+                <Route path="/grupos-trabalho" element={<GruposTrabalhoPage />} />
                 <Route path="/projetos" element={<ProjetosPage />} />
               </Routes>
               <Footer consensosParaVer={3}/>

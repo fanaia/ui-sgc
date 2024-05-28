@@ -9,6 +9,7 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
     if (_id) {
       const participanteData = await participanteService.loadParticipante(_id);
       if (!participanteData) return;
+      participanteData.senha = "";
       setParticipante(participanteData);
     }
   };
@@ -68,7 +69,9 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                   <FormControl
                     type="text"
                     value={participante.documento}
-                    onChange={(e) => setParticipante({ ...participante, documento: e.target.value })}
+                    onChange={(e) =>
+                      setParticipante({ ...participante, documento: e.target.value })
+                    }
                   />
                 </InputGroup>
 
@@ -78,6 +81,17 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                     type="text"
                     value={participante.chavePix}
                     onChange={(e) => setParticipante({ ...participante, chavePix: e.target.value })}
+                  />
+                </InputGroup>
+
+                <InputGroup className="mb-3">
+                  <InputGroup.Text>Token Hora</InputGroup.Text>
+                  <FormControl
+                    type="number"
+                    value={participante.tokenHora || ""}
+                    onChange={(e) =>
+                      setParticipante({ ...participante, tokenHora: e.target.value })
+                    }
                   />
                 </InputGroup>
 

@@ -15,10 +15,10 @@ const Login = () => {
 
     try {
       const response = await apiRetaguarda.post("/login", { whatsapp, senha });
-      const token = response.data.token;
+      const tokenJwt = response.data.tokenJwt;
 
-      // Armazene o token no localStorage
-      localStorage.setItem("token", token);
+      // Armazene o tokenJwt no localStorage
+      localStorage.setItem("tokenJwt", tokenJwt);
 
       navigate("/auth/carteira");
     } catch (error) {

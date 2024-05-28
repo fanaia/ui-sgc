@@ -3,32 +3,48 @@ import { jwtDecode } from "jwt-decode";
 import projetoService from "../services/projetoService";
 import atividadeService from "../services/atividadeService";
 import { Card, Form, FormControl, Button } from "react-bootstrap";
+import grupoTrabalhoService from "../services/grupoTrabalhoService";
 
 const AtividadeEdit = forwardRef(({ _id }, ref) => {
   const [step, setStep] = useState(1);
   const [projetos, setProjetos] = useState([]);
+  const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [selectedProjeto, setSelectedProjeto] = useState(null);
+  const [selectedGrupoTrabalho, setSelectedGrupoTrabalho] = useState(null);
   const [atividade, setAtividade] = useState({
     descricao: "",
     dataRealizacao: new Date().toISOString().substring(0, 10),
     totalHoras: "",
   });
 
-  const token = localStorage.getItem("token");
-  const decodedToken = jwtDecode(token);
-  const participanteId = decodedToken._id;
+  const tokenJwt = localStorage.getItem("tokenJwt");
+  const decodedTokenJwt = jwtDecode(tokenJwt);
+  const participanteId = decodedTokenJwt._id;
+  const tokenHora = decodedTokenJwt.tokenHora;
 
   useEffect(() => {
-    const loadProjetos = async () => {
-      const projetosData = await projetoService.listProjetos();
-      setProjetos(projetosData);
-    };
-    loadProjetos();
+    listGruposTrabalho();
+    listProjetos();
   }, []);
+
+  const listProjetos = async () => {
+    const projetosData = await projetoService.listProjetos();
+    setProjetos(projetosData);
+  };
+
+  const listGruposTrabalho = async () => {
+    const gruposTrabalhoData = await grupoTrabalhoService.listGruposTrabalho();
+    setGruposTrabalho(gruposTrabalhoData);
+  };
+
+  const handleGrupoTrabalhoSelect = (grupoTrabalho) => {
+    setSelectedGrupoTrabalho(grupoTrabalho);
+    setStep(projetos.length > 0 ? 2 : 3);
+  };
 
   const handleProjetoSelect = (projeto) => {
     setSelectedProjeto(projeto);
-    setStep(2);
+    setStep(3);
   };
 
   const handleChange = (event) => {
@@ -46,9 +62,10 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
   const save = async () => {
     const newAtividade = {
       ...atividade,
-      totalTokens: atividade.totalHoras * selectedProjeto.tokensHora,
+      totalTokens: atividade.totalHoras * tokenHora,
       participante: participanteId,
       projeto: selectedProjeto._id,
+      grupoTrabalho: selectedGrupoTrabalho._id,
     };
     return atividadeService.createAtividade(newAtividade);
   };
@@ -62,6 +79,17 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
     <div className="container">
       {step === 1 && (
         <div className="row">
+          <h3>Grupo de Trabalho</h3>
+          {gruposTrabalho.map((grupoTrabalho) => (
+            <Card key={grupoTrabalho._id} onClick={() => handleGrupoTrabalhoSelect(grupoTrabalho)}>
+              <Card.Body>{grupoTrabalho.nome}</Card.Body>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {step === 2 && (
+        <div className="row">
           {projetos.map((projeto) => (
             <Card key={projeto._id} onClick={() => handleProjetoSelect(projeto)}>
               <Card.Body>{projeto.nome}</Card.Body>
@@ -70,7 +98,7 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
         </div>
       )}
 
-      {step === 2 && (
+      {step === 3 && (
         <Form>
           <Form.Group>
             <Form.Label>Descreva a atividade que foi feita</Form.Label>
@@ -101,7 +129,7 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Token/Hora: {selectedProjeto.tokensHora}</Form.Label>
+            <Form.Label>Token/Hora: {tokenHora}</Form.Label>
           </Form.Group>
         </Form>
       )}
