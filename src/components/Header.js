@@ -20,7 +20,7 @@ const Header = () => {
           style={{ paddingLeft: "1rem" }}
           onClick={() => setExpanded(false)}
         >
-          SGC
+          CS pix-conta
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" style={{ paddingLeft: "1rem" }}>
