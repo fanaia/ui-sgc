@@ -5,7 +5,7 @@ const listParticipantes = async () => {
   return response.data;
 };
 
-const loadParticipante = async (_id) => {
+export const loadParticipante = async (_id) => {
   const response = await apiRetaguarda.get(`/participantes/${_id}`);
   return response.data;
 };
@@ -13,7 +13,10 @@ const loadParticipante = async (_id) => {
 const saveParticipante = async (participante) => {
   try {
     if (participante._id) {
-      await apiRetaguarda.patch(`/participantes/${participante._id}`, participante);
+      await apiRetaguarda.patch(
+        `/participantes/${participante._id}`,
+        participante
+      );
       return { success: true, message: "Alterado com sucesso!" };
     } else {
       await apiRetaguarda.post("/participantes", participante);
@@ -34,7 +37,9 @@ const deleteParticipante = async (_id) => {
 };
 
 const setAtivo = async (_id, ativo) => {
-  const response = await apiRetaguarda.patch(`/participantes/${_id}`, { ativo });
+  const response = await apiRetaguarda.patch(`/participantes/${_id}`, {
+    ativo,
+  });
   return response.data;
 };
 
