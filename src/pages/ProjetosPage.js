@@ -18,7 +18,9 @@ const ProjetosPage = () => {
   }, []);
 
   const fetchData = async () => {
-    projetoService.listProjetos().then((data) => setProjetos(data.map((item) => ({ ...item }))));
+    projetoService
+      .listProjetos()
+      .then((data) => setProjetos(data.map((item) => ({ ...item }))));
   };
 
   const toggleAtivo = async (_id, value) => {
@@ -66,27 +68,40 @@ const ProjetosPage = () => {
     <>
       <div className="container">
         {msg && (
-          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
+          <div
+            className={`alert alert-${msg.success ? "info" : "danger"}`}
+            role="alert"
+          >
             {JSON.stringify(msg.message)}
           </div>
         )}
-        <h1 className="my-4">Projetos</h1>
-        <Button onClick={handleAdd} className="btn btn-primary mb-3">
-          Adicionar Projeto
-        </Button>
+        <div className="d-flex justify-content-between align-items-center my-1">
+          <h1>Projetos</h1>
+          <Button onClick={handleAdd} className="btn btn-primary mb-3">
+            Adicionar
+          </Button>
+        </div>
         <div className="d-flex flex-wrap">
           {projetos.map((projeto) => (
-            <Card key={projeto._id} style={{ width: "18rem", margin: "10px" }}>
+            <Card
+              key={projeto._id}
+              style={{
+                width: "100%",
+                margin: "10px",
+                borderLeft: `10px solid ${projeto.corEtiqueta}`,
+                cursor: "pointer",
+              }}
+              onClick={() => handleEdit(projeto._id)}
+            >
               <Card.Body>
-                <Card.Title>
-                  <button
-                    type="button"
-                    className="btn btn-link"
-                    onClick={() => handleEdit(projeto._id)}
-                  >
-                    {projeto.nome}
-                  </button>
-                </Card.Title>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer" }}>{projeto.nome}</label>
+                </div>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer" }}>
+                    Ativo: {projeto.ativo}
+                  </label>
+                </div>
               </Card.Body>
             </Card>
           ))}
@@ -94,9 +109,13 @@ const ProjetosPage = () => {
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>{selectedId > 0 ? "Alterar Projeto" : "Adicionar Projeto"}</Modal.Title>
+          <Modal.Title>
+            {selectedId > 0 ? "Alterar Projeto" : "Adicionar Projeto"}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
+        <Modal.Body
+          style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}
+        >
           <ProjetoEdit ref={projetoEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
@@ -124,7 +143,10 @@ const ProjetosPage = () => {
         </Modal.Header>
         <Modal.Body>Tem certeza que deseja excluir este Projeto?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmModal(false)}
+          >
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>

@@ -1,4 +1,9 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import projetoService from "../services/projetoService";
 import { Card, Form, FormControl, InputGroup } from "react-bootstrap";
 
@@ -41,7 +46,9 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
                   <FormControl
                     type="text"
                     value={projeto.nome}
-                    onChange={(e) => setProjeto({ ...projeto, nome: e.target.value })}
+                    onChange={(e) =>
+                      setProjeto({ ...projeto, nome: e.target.value })
+                    }
                   />
                 </InputGroup>
 
@@ -50,16 +57,20 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
                   <FormControl
                     type="text"
                     value={projeto.descricao}
-                    onChange={(e) => setProjeto({ ...projeto, descricao: e.target.value })}
+                    onChange={(e) =>
+                      setProjeto({ ...projeto, descricao: e.target.value })
+                    }
                   />
                 </InputGroup>
 
                 <InputGroup className="mb-3">
-                  <InputGroup.Text>Tokens por Hora</InputGroup.Text>
+                  <InputGroup.Text>Cor da Etiqueta</InputGroup.Text>
                   <FormControl
-                    type="number"
-                    value={projeto.tokensHora}
-                    onChange={(e) => setProjeto({ ...projeto, tokensHora: e.target.value })}
+                    type="color"
+                    value={projeto.corEtiqueta}
+                    onChange={(e) =>
+                      setProjeto({ ...projeto, corEtiqueta: e.target.value })
+                    }
                   />
                 </InputGroup>
 
@@ -68,7 +79,9 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
                     id="ativo"
                     label="Ativo"
                     checked={projeto.ativo}
-                    onChange={(e) => setProjeto({ ...projeto, ativo: e.target.checked })}
+                    onChange={(e) =>
+                      setProjeto({ ...projeto, ativo: e.target.checked })
+                    }
                   />
                 </Form.Group>
               </Card.Body>
