@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import { jwtDecode } from "jwt-decode";
 import { format } from "date-fns";
 import projetoService from "../services/projetoService";
@@ -86,7 +91,10 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
         <div className="row">
           <h3>Grupo de Trabalho</h3>
           {gruposTrabalho.map((grupoTrabalho) => (
-            <Card key={grupoTrabalho._id} onClick={() => handleGrupoTrabalhoSelect(grupoTrabalho)}>
+            <Card
+              key={grupoTrabalho._id}
+              onClick={() => handleGrupoTrabalhoSelect(grupoTrabalho)}
+            >
               <div
                 style={{
                   width: "5px",
@@ -105,7 +113,10 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
         <div className="row">
           <h3>Projetos</h3>
           {projetos.map((projeto) => (
-            <Card key={projeto._id} onClick={() => handleProjetoSelect(projeto)}>
+            <Card
+              key={projeto._id}
+              onClick={() => handleProjetoSelect(projeto)}
+            >
               <div
                 style={{
                   width: "5px",
@@ -134,9 +145,13 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
           <Form.Group style={{ marginBottom: "5px" }}>
-            <Form.Label style={{ marginBottom: "2px" }}>Quando foi feito?</Form.Label>
+            <Form.Label style={{ marginBottom: "2px" }}>
+              Quando foi feito?
+            </Form.Label>
             <Form.Control
               type="date"
               name="dataRealizacao"
@@ -144,7 +159,9 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
           <Form.Group style={{ marginBottom: "5px" }}>
             <Form.Label style={{ marginBottom: "2px" }}>
               Quantas horas você dedicou nessa atividade?
@@ -156,21 +173,28 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
           <Form.Group style={{ marginBottom: "5px" }}>
             <Form.Label style={{ marginBottom: "2px" }}>
               Token/Hora: <strong>{tokenHora}</strong>
             </Form.Label>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicSelect">
-            <Form.Label>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>
               Grupo de Trabalho
             </Form.Label>
             <Form.Select
               id="grupo"
               value={atividade.grupoTrabalho}
-              onChange={(e) => setAtividade({ ...atividade, grupoTrabalho: e.target.value })}
+              onChange={(e) =>
+                setAtividade({ ...atividade, grupoTrabalho: e.target.value })
+              }
             >
               {gruposTrabalho.map((grupo) => (
                 <option key={grupo._id} value={grupo._id}>
@@ -179,12 +203,17 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               ))}
             </Form.Select>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicSelect">
-            <Form.Label>Projeto</Form.Label>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>Projeto</Form.Label>
             <Form.Select
               id="projeto"
               value={atividade.projeto}
-              onChange={(e) => setAtividade({ ...atividade, projeto: e.target.value })}
+              onChange={(e) =>
+                setAtividade({ ...atividade, projeto: e.target.value })
+              }
             >
               {projetos.map((projeto) => (
                 <option key={projeto._id} value={projeto._id}>
@@ -193,12 +222,17 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               ))}
             </Form.Select>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicSelect">
-            <Form.Label>Status</Form.Label>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>Status</Form.Label>
             <Form.Select
               id="status"
               value={atividade.status}
-              onChange={(e) => setAtividade({ ...atividade, status: e.target.value })}
+              onChange={(e) =>
+                setAtividade({ ...atividade, status: e.target.value })
+              }
             >
               <option value="pendente">Pendente</option>
               <option value="ativo">Ativo</option>
@@ -206,8 +240,9 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               <option value="cancelado">Cancelado</option>
             </Form.Select>
           </Form.Group>
-
-          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
         </Form>
       )}
     </div>

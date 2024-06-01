@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Modal, Button, ButtonGroup, Card } from "react-bootstrap";
-import { BsPlusCircleFill, BsClockFill, BsCoin } from "react-icons/bs";
+import {
+  BsPlusCircleFill,
+  BsClockFill,
+  BsCoin,
+  BsHandThumbsDown,
+  BsHandThumbsUp,
+} from "react-icons/bs";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import atividadeService from "../services/atividadeService";
@@ -24,23 +30,33 @@ const AtividadesPage = () => {
   }, []);
 
   const loadGrupoTrabalho = async (atividade) => {
-    const grupoTrabalho = await grupoTrabalhoService.loadGrupoTrabalho(atividade.grupoTrabalho);
+    const grupoTrabalho = await grupoTrabalhoService.loadGrupoTrabalho(
+      atividade.grupoTrabalho
+    );
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, grupoTrabalho } : atv))
+      prevAtividades.map((atv) =>
+        atv._id === atividade._id ? { ...atv, grupoTrabalho } : atv
+      )
     );
   };
 
   const loadParticipante = async (atividade) => {
-    const participante = await participanteService.loadParticipante(atividade.participante);
+    const participante = await participanteService.loadParticipante(
+      atividade.participante
+    );
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, participante } : atv))
+      prevAtividades.map((atv) =>
+        atv._id === atividade._id ? { ...atv, participante } : atv
+      )
     );
   };
 
   const loadProjeto = async (atividade) => {
     const projeto = await projetoService.loadProjeto(atividade.projeto);
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, projeto } : atv))
+      prevAtividades.map((atv) =>
+        atv._id === atividade._id ? { ...atv, projeto } : atv
+      )
     );
   };
 
@@ -100,7 +116,10 @@ const AtividadesPage = () => {
     <>
       <div style={{ paddingBottom: "110px" }} className="container">
         {msg && (
-          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
+          <div
+            className={`alert alert-${msg.success ? "info" : "danger"}`}
+            role="alert"
+          >
             {JSON.stringify(msg.message)}
           </div>
         )}
@@ -124,7 +143,10 @@ const AtividadesPage = () => {
                 borderLeft: `10px solid ${atividade.corEtiqueta}`,
                 cursor: "pointer",
                 opacity:
-                  atividade.status === "cancelado" || atividade.status === "recusado" ? 0.5 : 1,
+                  atividade.status === "cancelado" ||
+                  atividade.status === "recusado"
+                    ? 0.5
+                    : 1,
               }}
               onClick={() => handleEdit(atividade._id)}
             >
@@ -173,7 +195,9 @@ const AtividadesPage = () => {
                       cursor: "pointer",
                     }}
                   >
-                    {format(new Date(atividade.dataRealizacao), "dd/MMM", { locale: ptBR })}
+                    {format(new Date(atividade.dataRealizacao), "dd/MMM", {
+                      locale: ptBR,
+                    })}
                   </label>
                 </div>
                 <div
@@ -207,7 +231,9 @@ const AtividadesPage = () => {
                 </div>
               </Card.Body>
               <Card.Footer>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
                   <div>
                     {atividade.status !== "pendente" && (
                       <label
@@ -226,7 +252,6 @@ const AtividadesPage = () => {
                         <button
                           type="button"
                           style={{
-                            color: "white",
                             borderRadius: "50%",
                             width: "40px",
                             height: "40px",
@@ -237,12 +262,11 @@ const AtividadesPage = () => {
                             marginRight: "10px", // Adiciona espaço à direita do botão
                           }}
                         >
-                          👎
+                          <BsHandThumbsDown style={{ color: "darkblue" }} />
                         </button>
                         <button
                           type="button"
                           style={{
-                            color: "white",
                             borderRadius: "50%",
                             width: "40px",
                             height: "40px",
@@ -252,7 +276,7 @@ const AtividadesPage = () => {
                             justifyContent: "center",
                           }}
                         >
-                          👍
+                          <BsHandThumbsUp style={{ color: "darkblue" }} />
                         </button>
                       </div>
                     )}
@@ -280,9 +304,13 @@ const AtividadesPage = () => {
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>{selectedId > 0 ? "Alterar Atividade" : "Adicionar Atividade"}</Modal.Title>
+          <Modal.Title>
+            {selectedId > 0 ? "Alterar Atividade" : "Adicionar Atividade"}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
+        <Modal.Body
+          style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}
+        >
           <AtividadeEdit ref={atividadeEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
@@ -310,7 +338,10 @@ const AtividadesPage = () => {
         </Modal.Header>
         <Modal.Body>Tem certeza que deseja excluir esta Atividade?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmModal(false)}
+          >
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>
