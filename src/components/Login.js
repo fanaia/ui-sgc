@@ -16,15 +16,12 @@ const Login = () => {
     try {
       const response = await apiRetaguarda.post("/login", { whatsapp, senha });
       const tokenJwt = response.data.tokenJwt;
-
-      // Armazene o tokenJwt no localStorage
       localStorage.setItem("tokenJwt", tokenJwt);
 
       navigate("/auth/carteira");
     } catch (error) {
       setMsg(error.message);
       console.error("Falha na autenticação", error);
-      // Aqui você pode adicionar qualquer tratamento de erro que desejar
     }
   };
 

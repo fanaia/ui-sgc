@@ -2,10 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Form, Modal, Button, ButtonGroup } from "react-bootstrap";
 import grupoTrabalhoService from "../services/grupoTrabalhoService";
 import GrupoTrabalhoEdit from "../components/GrupoTrabalhoEdit";
+import participanteService from "../services/participanteService";
 
 const GruposTrabalhoPage = () => {
   const [msg, setMsg] = useState();
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
+  const [participantes, setParticipantes] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -21,12 +23,16 @@ const GruposTrabalhoPage = () => {
     grupoTrabalhoService
       .listGruposTrabalho()
       .then((data) => setGruposTrabalho(data.map((item) => ({ ...item }))));
+
+    participanteService
+      .listParticipantes()
+      .then((data) => setParticipantes(data.map((item) => ({ ...item }))));
   };
 
-  const toggleAtivo = async (_id, value) => {
-    await grupoTrabalhoService.setAtivo(_id, value);
-    fetchData();
-  };
+  // const toggleAtivo = async (_id, value) => {
+  //   await grupoTrabalhoService.setAtivo(_id, value);
+  //   fetchData();
+  // };
 
   const handleEdit = (_id) => {
     setSelectedId(_id);
@@ -92,11 +98,7 @@ const GruposTrabalhoPage = () => {
                 <td>{grupoTrabalho.nome}</td>
                 <td>{grupoTrabalho.descricao}</td>
                 <td>
-                  <Form.Check
-                    type="checkbox"
-                    checked={grupoTrabalho.ativo}
-                    onChange={(e) => toggleAtivo(grupoTrabalho._id, e.target.checked)}
-                  />
+                  <Form.Check type="checkbox" checked={grupoTrabalho.ativo} enabled={false} />
                 </td>
                 <td>{grupoTrabalho.participanteResponsavel}</td>
                 <td>
