@@ -1,13 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Form,
-  Modal,
-  Button,
-  ButtonGroup,
-  ProgressBar,
-  Card,
-} from "react-bootstrap";
+import { Modal, Button, ButtonGroup, Card } from "react-bootstrap";
 import { BsPlusCircleFill, BsClockFill, BsCoin } from "react-icons/bs";
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import atividadeService from "../services/atividadeService";
 import AtividadeEdit from "../components/AtividadeEdit";
 import participanteService from "../services/participanteService";
@@ -29,33 +24,23 @@ const AtividadesPage = () => {
   }, []);
 
   const loadGrupoTrabalho = async (atividade) => {
-    const grupoTrabalho = await grupoTrabalhoService.loadGrupoTrabalho(
-      atividade.grupoTrabalho
-    );
+    const grupoTrabalho = await grupoTrabalhoService.loadGrupoTrabalho(atividade.grupoTrabalho);
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) =>
-        atv._id === atividade._id ? { ...atv, grupoTrabalho } : atv
-      )
+      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, grupoTrabalho } : atv))
     );
   };
 
   const loadParticipante = async (atividade) => {
-    const participante = await participanteService.loadParticipante(
-      atividade.participante
-    );
+    const participante = await participanteService.loadParticipante(atividade.participante);
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) =>
-        atv._id === atividade._id ? { ...atv, participante } : atv
-      )
+      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, participante } : atv))
     );
   };
 
   const loadProjeto = async (atividade) => {
     const projeto = await projetoService.loadProjeto(atividade.projeto);
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) =>
-        atv._id === atividade._id ? { ...atv, projeto } : atv
-      )
+      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, projeto } : atv))
     );
   };
 
@@ -115,10 +100,7 @@ const AtividadesPage = () => {
     <>
       <div style={{ paddingBottom: "110px" }} className="container">
         {msg && (
-          <div
-            className={`alert alert-${msg.success ? "info" : "danger"}`}
-            role="alert"
-          >
+          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
             {JSON.stringify(msg.message)}
           </div>
         )}
@@ -127,7 +109,7 @@ const AtividadesPage = () => {
           <Button
             onClick={handleAdd}
             className="btn btn-link mb-3 border-0 btn-no-hover btn-outline-none"
-            style={{ fontSize: "25px", backgroundColor: "transparent" }}
+            style={{ fontSize: "35px", backgroundColor: "transparent" }}
           >
             <BsPlusCircleFill />
           </Button>
@@ -180,8 +162,16 @@ const AtividadesPage = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    {atividade.descricao.charAt(0).toUpperCase() +
-                      atividade.descricao.slice(1).toLowerCase()}
+                    {atividade.descricao}
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <label
+                    style={{
+                      cursor: "pointer",
+                    }}
+                  >
+                    {format(new Date(atividade.dataRealizacao), 'dd/MMM', { locale: ptBR })}
                   </label>
                 </div>
                 <div
@@ -200,7 +190,7 @@ const AtividadesPage = () => {
                       color: "#606060", // Altere o tom de cinza aqui
                     }}
                   >
-                    <BsClockFill /> Horas: {atividade.totalHoras}h
+                    <BsClockFill /> Tempo: {atividade.totalHoras} hrs
                   </label>
                   <label
                     style={{
@@ -210,14 +200,12 @@ const AtividadesPage = () => {
                       color: "#606060", // Altere o tom de cinza aqui
                     }}
                   >
-                    <BsCoin /> Total de Tokens: {atividade.totalTokens}
+                    <BsCoin /> Valor: {atividade.totalTokens} PIX
                   </label>
                 </div>
               </Card.Body>
               <Card.Footer>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <div>
                     <label
                       style={{
@@ -227,7 +215,7 @@ const AtividadesPage = () => {
                         fontStyle: "italic",
                       }}
                     >
-                      Status: {atividade.status}
+                      {atividade.status}
                     </label>
                   </div>
                   <div>
@@ -241,7 +229,6 @@ const AtividadesPage = () => {
                           fontStyle: "italic",
                         }}
                       >
-                        Participante:{" "}
                         {atividade.participante.nome || "Carregando..."}
                       </label>
                     ) : null}
@@ -254,13 +241,9 @@ const AtividadesPage = () => {
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>
-            {selectedId > 0 ? "Alterar Atividade" : "Adicionar Atividade"}
-          </Modal.Title>
+          <Modal.Title>{selectedId > 0 ? "Alterar Atividade" : "Adicionar Atividade"}</Modal.Title>
         </Modal.Header>
-        <Modal.Body
-          style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}
-        >
+        <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
           <AtividadeEdit ref={atividadeEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
@@ -288,10 +271,7 @@ const AtividadesPage = () => {
         </Modal.Header>
         <Modal.Body>Tem certeza que deseja excluir esta Atividade?</Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowConfirmModal(false)}
-          >
+          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>
