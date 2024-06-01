@@ -207,7 +207,7 @@ const AtividadesPage = () => {
                       cursor: "pointer",
                       fontSize: "calc(1em - 2px)",
                       fontStyle: "italic",
-                      color: "#606060", // Altere o tom de cinza aqui
+                      color: "#606061", // Altere o tom de cinza aqui
                     }}
                   >
                     <BsCoin /> Total de Tokens: {atividade.totalTokens}
