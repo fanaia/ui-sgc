@@ -14,7 +14,17 @@ function HomePage() {
           </Card.Text>
         </Card.Body>
       </Card>
-      
+      <Card className="mb-3">
+        <Card.Header>
+          <strong>Saldo</strong>
+        </Card.Header>
+        <Card.Body>
+          <Card.Text style={{ display: "flex", alignItems: "center" }}>
+            <strong style={{ fontSize: "1.2em" }}>4.200 PIX / R$ 336.000,00</strong>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+      <hr />
       <Card className="mb-3">
         <Card.Header>
           <strong>Fundo Segurança</strong>
