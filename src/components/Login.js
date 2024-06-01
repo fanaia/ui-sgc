@@ -18,7 +18,7 @@ const Login = () => {
       const tokenJwt = response.data.tokenJwt;
       localStorage.setItem("tokenJwt", tokenJwt);
 
-      navigate("/auth/carteira");
+      navigate("/auth/home");
     } catch (error) {
       setMsg(error.message);
       console.log(error.message);

@@ -12,6 +12,7 @@ import FinanceiroPage from "./pages/FinanceiroPage";
 import CarteiraPage from "./pages/carteira/CarteiraPage";
 import AtividadesPage from "./pages/AtividadesPage";
 import GruposTrabalhoPage from "./pages/GruposTrabalhoPage";
+import HomePage from "./pages/HomePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,7 +26,7 @@ root.render(
             <>
               <Header />
               <Routes>
-                <Route path="/home" element={<CarteiraPage />} />
+                <Route path="/home" element={<HomePage />} />
                 <Route path="/carteira" element={<CarteiraPage />} />
                 <Route path="/consenso" element={<ConsensoPage />} />
                 <Route path="/atividades" element={<AtividadesPage />} />
