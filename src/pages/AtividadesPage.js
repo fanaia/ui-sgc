@@ -167,7 +167,21 @@ const AtividadesPage = () => {
                   ) : null}
                 </div>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>Status: {atividade.status}</label>
+                  <label
+                    style={{
+                      cursor: "pointer",
+                      backgroundColor:
+                        atividade.status === "ativo"
+                          ? "green"
+                          : atividade.status === "pendente"
+                          ? "yellow"
+                          : "transparent",
+                      padding: "5px",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    Status: {atividade.status}
+                  </label>
                 </div>
               </Card.Body>
             </Card>

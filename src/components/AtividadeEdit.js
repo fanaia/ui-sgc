@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useImperativeHandle,
-  forwardRef,
-} from "react";
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import { jwtDecode } from "jwt-decode";
 import projetoService from "../services/projetoService";
 import atividadeService from "../services/atividadeService";
@@ -11,7 +6,7 @@ import { Card, Form } from "react-bootstrap";
 import grupoTrabalhoService from "../services/grupoTrabalhoService";
 
 const AtividadeEdit = forwardRef(({ _id }, ref) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(_id ? 3 : 1);
   const [projetos, setProjetos] = useState([]);
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [selectedProjeto, setSelectedProjeto] = useState(null);
@@ -80,40 +75,18 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
     load,
   }));
 
-  function getBarColor(id) {
-    switch (id) {
-      case "6655d7e968bebf702fa70895":
-        return "red";
-      case "6655d83268bebf702fa708ba":
-        return "blue";
-      case "6655d88568bebf702fa708d4":
-        return "darkgoldenrod";
-      case "6655de4eecfd7eb672ffde64":
-        return "green";
-      case "6655de5decfd7eb672ffde69":
-        return "purple";
-      case "6655eb69868d7a6e944e4f78":
-        return "magenta";
-      default:
-        return "white"; // cor padrão se o ID não corresponder a nenhum dos casos acima
-    }
-  }
-
   return (
     <div className="container">
       {step === 1 && (
         <div className="row">
           <h3>Grupo de Trabalho</h3>
           {gruposTrabalho.map((grupoTrabalho) => (
-            <Card
-              key={grupoTrabalho._id}
-              onClick={() => handleGrupoTrabalhoSelect(grupoTrabalho)}
-            >
+            <Card key={grupoTrabalho._id} onClick={() => handleGrupoTrabalhoSelect(grupoTrabalho)}>
               <div
                 style={{
                   width: "5px",
                   height: "100%",
-                  backgroundColor: getBarColor(grupoTrabalho._id),
+                  backgroundColor: grupoTrabalho.corEtiqueta,
                   position: "absolute",
                 }}
               ></div>
@@ -127,15 +100,12 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
         <div className="row">
           <h3>Projetos</h3>
           {projetos.map((projeto) => (
-            <Card
-              key={projeto._id}
-              onClick={() => handleProjetoSelect(projeto)}
-            >
+            <Card key={projeto._id} onClick={() => handleProjetoSelect(projeto)}>
               <div
                 style={{
                   width: "5px",
                   height: "100%",
-                  backgroundColor: getBarColor(projeto._id),
+                  backgroundColor: projeto.corEtiqueta,
                   position: "absolute",
                 }}
               ></div>
@@ -159,13 +129,9 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <div
-            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-          ></div>
+          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
           <Form.Group style={{ marginBottom: "5px" }}>
-            <Form.Label style={{ marginBottom: "2px" }}>
-              Quando foi feito?
-            </Form.Label>
+            <Form.Label style={{ marginBottom: "2px" }}>Quando foi feito?</Form.Label>
             <Form.Control
               type="date"
               name="dataRealizacao"
@@ -173,9 +139,7 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <div
-            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-          ></div>
+          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
           <Form.Group style={{ marginBottom: "5px" }}>
             <Form.Label style={{ marginBottom: "2px" }}>
               Quantas horas você dedicou nessa atividade?
@@ -187,13 +151,33 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <div
-            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-          ></div>
+          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
           <Form.Group style={{ marginBottom: "5px" }}>
             <Form.Label style={{ marginBottom: "2px" }}>
               Token/Hora: <strong>{tokenHora}</strong>
             </Form.Label>
+          </Form.Group>
+          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>Grupo de Trabalho</Form.Label>
+            <Form.Select
+              name="grupoTrabalho"
+              value={atividade.grupoTrabalho}
+              onChange={handleChange}
+            >
+              {gruposTrabalho.map((grupo) => (
+                <option value={grupo._id}>{grupo.nome}</option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>Projeto</Form.Label>
+            <Form.Select name="projeto" value={atividade.projeto} onChange={handleChange}>
+              {projetos.map((projeto) => (
+                <option value={projeto.id}>{projeto.nome}</option>
+              ))}
+            </Form.Select>
           </Form.Group>
         </Form>
       )}
