@@ -1,4 +1,9 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import grupoTrabalhoService from "../services/grupoTrabalhoService";
 import { Card, Form, FormControl, InputGroup } from "react-bootstrap";
 import participanteService from "../services/participanteService";
@@ -9,7 +14,9 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
 
   const load = async () => {
     if (_id) {
-      const grupoTrabalhoData = await grupoTrabalhoService.loadGrupoTrabalho(_id);
+      const grupoTrabalhoData = await grupoTrabalhoService.loadGrupoTrabalho(
+        _id
+      );
       if (!grupoTrabalhoData) return;
       setGrupoTrabalho(grupoTrabalhoData);
     }
@@ -39,69 +46,96 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
       <div className="row">
         <div className="col">
           <Form>
-            <Card className="mb-3">
-              <Card.Header>
-                <Card.Title>Dados do Grupo de Trabalho</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Nome</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={grupoTrabalho.nome}
-                    onChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, nome: e.target.value })}
-                  />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Descrição</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={grupoTrabalho.descricao}
-                    onChange={(e) =>
-                      setGrupoTrabalho({ ...grupoTrabalho, descricao: e.target.value })
-                    }
-                  />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Cor da Etiqueta</InputGroup.Text>
-                  <FormControl
-                    type="color"
-                    value={grupoTrabalho.corEtiqueta}
-                    onChange={(e) =>
-                      setGrupoTrabalho({ ...grupoTrabalho, corEtiqueta: e.target.value })
-                    }
-                  />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Ativo</InputGroup.Text>
-                  <Form.Check
-                    type="checkbox"
-                    checked={grupoTrabalho.ativo}
-                    onChange={(e) =>
-                      setGrupoTrabalho({ ...grupoTrabalho, ativo: e.target.checked })
-                    }
-                  />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Participante Responsável</InputGroup.Text>
-                  <Form.Select
-                    value={grupoTrabalho.participanteResponsavel}
-                    onChange={(e) =>
-                      setGrupoTrabalho({
-                        ...grupoTrabalho,
-                        participanteResponsavel: e.target.value,
-                      })
-                    }
-                  >
-                    {participantes.map((participante) => (
-                      <option key={participante._id} value={participante._id}>
-                        {participante.nome}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </InputGroup>
-              </Card.Body>
-            </Card>
+            <h4>Dados do Grupo de Trabalho</h4>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>Nome</Form.Label>
+              <FormControl
+                type="text"
+                value={grupoTrabalho.nome}
+                onChange={(e) =>
+                  setGrupoTrabalho({
+                    ...grupoTrabalho,
+                    nome: e.target.value,
+                  })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>Descrição</Form.Label>
+              <FormControl
+                type="text"
+                value={grupoTrabalho.descricao}
+                onChange={(e) =>
+                  setGrupoTrabalho({
+                    ...grupoTrabalho,
+                    descricao: e.target.value,
+                  })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Cor da Etiqueta
+              </Form.Label>
+              <FormControl
+                className="w-100"
+                type="color"
+                value={grupoTrabalho.corEtiqueta}
+                onChange={(e) =>
+                  setGrupoTrabalho({
+                    ...grupoTrabalho,
+                    corEtiqueta: e.target.value,
+                  })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>Status:</Form.Label>
+              <Form.Select
+                id="status"
+                value={grupoTrabalho.status}
+                onChange={(e) =>
+                  setGrupoTrabalho({ ...grupoTrabalho, status: e.target.value })
+                }
+              >
+                <option value="pendente">Pendente</option>
+                <option value="ativo">Ativo</option>
+                <option value="recusado">Recusado</option>
+                <option value="cancelado">Cancelado</option>
+              </Form.Select>
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Partipante:
+              </Form.Label>
+              <Form.Select
+                value={grupoTrabalho.participanteResponsavel}
+                onChange={(e) =>
+                  setGrupoTrabalho({
+                    ...grupoTrabalho,
+                    participanteResponsavel: e.target.value,
+                  })
+                }
+              >
+                {participantes.map((participante) => (
+                  <option key={participante._id} value={participante._id}>
+                    {participante.nome}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
           </Form>
         </div>
       </div>
