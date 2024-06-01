@@ -1,6 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Form, Modal, Button, ButtonGroup, ProgressBar, Card } from "react-bootstrap";
-import { HandThumbsDown, HandThumbsUp } from "react-bootstrap-icons";
+import {
+  Form,
+  Modal,
+  Button,
+  ButtonGroup,
+  ProgressBar,
+  Card,
+} from "react-bootstrap";
+import { BsPlusCircleFill, BsClockFill, BsCoin } from "react-icons/bs";
 import atividadeService from "../services/atividadeService";
 import AtividadeEdit from "../components/AtividadeEdit";
 import participanteService from "../services/participanteService";
@@ -22,23 +29,33 @@ const AtividadesPage = () => {
   }, []);
 
   const loadGrupoTrabalho = async (atividade) => {
-    const grupoTrabalho = await grupoTrabalhoService.loadGrupoTrabalho(atividade.grupoTrabalho);
+    const grupoTrabalho = await grupoTrabalhoService.loadGrupoTrabalho(
+      atividade.grupoTrabalho
+    );
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, grupoTrabalho } : atv))
+      prevAtividades.map((atv) =>
+        atv._id === atividade._id ? { ...atv, grupoTrabalho } : atv
+      )
     );
   };
 
   const loadParticipante = async (atividade) => {
-    const participante = await participanteService.loadParticipante(atividade.participante);
+    const participante = await participanteService.loadParticipante(
+      atividade.participante
+    );
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, participante } : atv))
+      prevAtividades.map((atv) =>
+        atv._id === atividade._id ? { ...atv, participante } : atv
+      )
     );
   };
 
   const loadProjeto = async (atividade) => {
     const projeto = await projetoService.loadProjeto(atividade.projeto);
     setAtividades((prevAtividades) =>
-      prevAtividades.map((atv) => (atv._id === atividade._id ? { ...atv, projeto } : atv))
+      prevAtividades.map((atv) =>
+        atv._id === atividade._id ? { ...atv, projeto } : atv
+      )
     );
   };
 
@@ -98,14 +115,21 @@ const AtividadesPage = () => {
     <>
       <div style={{ paddingBottom: "110px" }} className="container">
         {msg && (
-          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
+          <div
+            className={`alert alert-${msg.success ? "info" : "danger"}`}
+            role="alert"
+          >
             {JSON.stringify(msg.message)}
           </div>
         )}
         <div className="d-flex justify-content-between align-items-center my-1">
-          <h1>Atividades</h1>
-          <Button onClick={handleAdd} className="btn btn-primary mb-3">
-            Adicionar
+          <h1 style={{ marginLeft: "10px" }}>Atividades</h1>
+          <Button
+            onClick={handleAdd}
+            className="btn btn-link mb-3 border-0 btn-no-hover btn-outline-none"
+            style={{ fontSize: "25px", backgroundColor: "transparent" }}
+          >
+            <BsPlusCircleFill />
           </Button>
         </div>
         <div className="d-flex flex-wrap">
@@ -120,7 +144,7 @@ const AtividadesPage = () => {
               }}
               onClick={() => handleEdit(atividade._id)}
             >
-              <Card.Body>
+              <Card.Header>
                 <div className="mt-2">
                   {atividade.grupoTrabalho ? (
                     <label
@@ -128,6 +152,7 @@ const AtividadesPage = () => {
                         backgroundColor: atividade.grupoTrabalho.corEtiqueta,
                         paddingLeft: "10px",
                         paddingRight: "10px",
+                        color: "#ffffff", // Adicione esta linha
                       }}
                     >
                       {atividade.grupoTrabalho.nome || "Carregando..."}
@@ -139,46 +164,103 @@ const AtividadesPage = () => {
                         backgroundColor: atividade.projeto.corEtiqueta,
                         paddingLeft: "10px",
                         paddingRight: "10px",
+                        color: "#ffffff", // Adicione esta linha
                       }}
                     >
                       {atividade.projeto.nome || "Carregando..."}
                     </label>
                   ) : null}
                 </div>
+              </Card.Header>
+              <Card.Body>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>
-                    {atividade.descricao}
+                  <label
+                    style={{
+                      cursor: "pointer",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {atividade.descricao.charAt(0).toUpperCase() +
+                      atividade.descricao.slice(1).toLowerCase()}
                   </label>
                 </div>
-                <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>
-                    Valor: {atividade.totalHoras} hrs / {atividade.totalTokens} Token{" "}
+                <div
+                  className="mt-2"
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginBottom: "-8px",
+                  }}
+                >
+                  <label
+                    style={{
+                      cursor: "pointer",
+                      fontSize: "calc(1em - 2px)",
+                      fontStyle: "italic",
+                      color: "#606060", // Altere o tom de cinza aqui
+                    }}
+                  >
+                    <BsClockFill /> Horas: {atividade.totalHoras}h
+                  </label>
+                  <label
+                    style={{
+                      cursor: "pointer",
+                      fontSize: "calc(1em - 2px)",
+                      fontStyle: "italic",
+                      color: "#606060", // Altere o tom de cinza aqui
+                    }}
+                  >
+                    <BsCoin /> Total de Tokens: {atividade.totalTokens}
                   </label>
                 </div>
-                <div className="mt-2">
-                  {atividade.participante ? (
+              </Card.Body>
+              <Card.Footer>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div>
                     <label
                       style={{
                         cursor: "pointer",
+                        fontSize: "0.8em", // Aumente a fonte aqui
+                        fontWeight: "bold",
+                        fontStyle: "italic",
                       }}
                     >
-                      Participante: {atividade.participante.nome || "Carregando..."}
+                      Status: {atividade.status}
                     </label>
-                  ) : null}
+                  </div>
+                  <div>
+                    {atividade.participante ? (
+                      <label
+                        style={{
+                          cursor: "pointer",
+                          textAlign: "right",
+                          fontSize: "0.8em", // Aumente a fonte aqui
+                          fontWeight: "bold",
+                          fontStyle: "italic",
+                        }}
+                      >
+                        Participante:{" "}
+                        {atividade.participante.nome || "Carregando..."}
+                      </label>
+                    ) : null}
+                  </div>
                 </div>
-                <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>Status: {atividade.status}</label>
-                </div>
-              </Card.Body>
+              </Card.Footer>
             </Card>
           ))}
         </div>
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>{selectedId > 0 ? "Alterar Atividade" : "Adicionar Atividade"}</Modal.Title>
+          <Modal.Title>
+            {selectedId > 0 ? "Alterar Atividade" : "Adicionar Atividade"}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
+        <Modal.Body
+          style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}
+        >
           <AtividadeEdit ref={atividadeEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
@@ -206,7 +288,10 @@ const AtividadesPage = () => {
         </Modal.Header>
         <Modal.Body>Tem certeza que deseja excluir esta Atividade?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmModal(false)}
+          >
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>
