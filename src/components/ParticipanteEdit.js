@@ -95,13 +95,18 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                   />
                 </InputGroup>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                  <Form.Switch
-                    id="ativo"
-                    label="Ativo"
-                    checked={participante.ativo}
-                    onChange={(e) => setParticipante({ ...participante, ativo: e.target.checked })}
-                  />
+                <Form.Group className="mb-3" controlId="formBasicSelect">
+                  <Form.Label>Status</Form.Label>
+                  <Form.Select
+                    id="status"
+                    value={participante.status}
+                    onChange={(e) => setParticipante({ ...participante, status: e.target.value })}
+                  >
+                    <option value="pendente">Pendente</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="recusado">Recusado</option>
+                    <option value="cancelado">Cancelado</option>
+                  </Form.Select>
                 </Form.Group>
               </Card.Body>
             </Card>

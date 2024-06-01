@@ -6,9 +6,9 @@ const apiRetaguarda = axios.create({
 });
 
 apiRetaguarda.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+  const tokenJwt = localStorage.getItem("tokenJwt");
+  if (tokenJwt) {
+    config.headers.Authorization = `Bearer ${tokenJwt}`;
   }
   return config;
 });

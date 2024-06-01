@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Form, Modal, Button, ButtonGroup } from "react-bootstrap";
+import { Form, Modal, Button, ButtonGroup, Card } from "react-bootstrap";
 import projetoService from "../services/projetoService";
 import ProjetoEdit from "../components/ProjetoEdit";
 
@@ -21,10 +21,10 @@ const ProjetosPage = () => {
     projetoService.listProjetos().then((data) => setProjetos(data.map((item) => ({ ...item }))));
   };
 
-  const toggleAtivo = async (_id, value) => {
-    await projetoService.setAtivo(_id, value);
-    fetchData();
-  };
+  // const toggleAtivo = async (_id, value) => {
+  //   await projetoService.setAtivo(_id, value);
+  //   fetchData();
+  // };
 
   const handleEdit = (_id) => {
     setSelectedId(_id);
@@ -70,47 +70,35 @@ const ProjetosPage = () => {
             {JSON.stringify(msg.message)}
           </div>
         )}
-        <h1 className="my-4">Projetos</h1>
-        <Button onClick={handleAdd} className="btn btn-primary mb-3">
-          Adicionar Projeto
-        </Button>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th className="d-none d-md-table-cell">Ativo</th>
-              <th className="d-none d-md-table-cell"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {projetos.map((projeto) => (
-              <tr key={projeto._id}>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-link"
-                    onClick={() => handleEdit(projeto._id)}
-                  >
-                    {projeto.nome}
-                  </button>
-                </td>
-                <td className="d-none d-md-table-cell">
-                  <Form.Check
-                    type="switch"
-                    id={`ativo-${projeto._id}`}
-                    checked={projeto.ativo}
-                    onChange={() => toggleAtivo(projeto._id, !projeto.ativo)}
-                  />
-                </td>
-                <td className="d-none d-md-table-cell">
-                  <Button variant="danger" onClick={() => askForDeleteConfirmation(projeto._id)}>
-                    Excluir
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="d-flex justify-content-between align-items-center my-1">
+          <h1>Projetos</h1>
+          <Button onClick={handleAdd} className="btn btn-primary mb-3">
+            Adicionar
+          </Button>
+        </div>
+        <div className="d-flex flex-wrap">
+          {projetos.map((projeto) => (
+            <Card
+              key={projeto._id}
+              style={{
+                width: "100%",
+                margin: "10px",
+                borderLeft: `10px solid ${projeto.corEtiqueta}`,
+                cursor: "pointer",
+              }}
+              onClick={() => handleEdit(projeto._id)}
+            >
+              <Card.Body>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>{projeto.nome}</label>
+                </div>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer" }}>Status: {projeto.status}</label>
+                </div>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>

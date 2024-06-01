@@ -1,12 +1,18 @@
-import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import { jwtDecode } from "jwt-decode";
+import { format } from "date-fns";
 import projetoService from "../services/projetoService";
 import atividadeService from "../services/atividadeService";
-import { Card, Form, FormControl, Button } from "react-bootstrap";
+import { Card, Form } from "react-bootstrap";
 import grupoTrabalhoService from "../services/grupoTrabalhoService";
 
 const AtividadeEdit = forwardRef(({ _id }, ref) => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(_id ? 3 : 1);
   const [projetos, setProjetos] = useState([]);
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [selectedProjeto, setSelectedProjeto] = useState(null);
@@ -64,11 +70,15 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
       ...atividade,
       totalTokens: atividade.totalHoras * tokenHora,
       participante: participanteId,
-      projeto: selectedProjeto._id,
-      grupoTrabalho: selectedGrupoTrabalho._id,
+      projeto: atividade.projeto._id,
+      grupoTrabalho: atividade.grupoTrabalho._id,
     };
-    return atividadeService.createAtividade(newAtividade);
+    return atividadeService.saveAtividade(newAtividade);
   };
+
+  useEffect(() => {
+    load();
+  }, [_id]);
 
   useImperativeHandle(ref, () => ({
     save,
@@ -81,7 +91,18 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
         <div className="row">
           <h3>Grupo de Trabalho</h3>
           {gruposTrabalho.map((grupoTrabalho) => (
-            <Card key={grupoTrabalho._id} onClick={() => handleGrupoTrabalhoSelect(grupoTrabalho)}>
+            <Card
+              key={grupoTrabalho._id}
+              onClick={() => handleGrupoTrabalhoSelect(grupoTrabalho)}
+            >
+              <div
+                style={{
+                  width: "5px",
+                  height: "100%",
+                  backgroundColor: grupoTrabalho.corEtiqueta,
+                  position: "absolute",
+                }}
+              ></div>
               <Card.Body>{grupoTrabalho.nome}</Card.Body>
             </Card>
           ))}
@@ -90,8 +111,20 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
 
       {step === 2 && (
         <div className="row">
+          <h3>Projetos</h3>
           {projetos.map((projeto) => (
-            <Card key={projeto._id} onClick={() => handleProjetoSelect(projeto)}>
+            <Card
+              key={projeto._id}
+              onClick={() => handleProjetoSelect(projeto)}
+            >
+              <div
+                style={{
+                  width: "5px",
+                  height: "100%",
+                  backgroundColor: projeto.corEtiqueta,
+                  position: "absolute",
+                }}
+              ></div>
               <Card.Body>{projeto.nome}</Card.Body>
             </Card>
           ))}
@@ -100,8 +133,10 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
 
       {step === 3 && (
         <Form>
-          <Form.Group>
-            <Form.Label>Descreva a atividade que foi feita</Form.Label>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>
+              Descreva a atividade que foi feita:
+            </Form.Label>
             <Form.Control
               as="textarea"
               rows={3}
@@ -110,17 +145,27 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Quando foi feito</Form.Label>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>
+              Quando foi feito?
+            </Form.Label>
             <Form.Control
               type="date"
               name="dataRealizacao"
-              value={atividade.dataRealizacao}
+              value={format(new Date(atividade.dataRealizacao), "yyyy-MM-dd")}
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Quantas horas você dedicou nessa atividade</Form.Label>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>
+              Quantas horas você dedicou nessa atividade?
+            </Form.Label>
             <Form.Control
               type="number"
               name="totalHoras"
@@ -128,9 +173,76 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               onChange={handleChange}
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Token/Hora: {tokenHora}</Form.Label>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>
+              Token/Hora: <strong>{tokenHora}</strong>
+            </Form.Label>
           </Form.Group>
+
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>
+              Grupo de Trabalho
+            </Form.Label>
+            <Form.Select
+              id="grupo"
+              value={atividade.grupoTrabalho}
+              onChange={(e) =>
+                setAtividade({ ...atividade, grupoTrabalho: e.target.value })
+              }
+            >
+              {gruposTrabalho.map((grupo) => (
+                <option key={grupo._id} value={grupo._id}>
+                  {grupo.nome}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>Projeto</Form.Label>
+            <Form.Select
+              id="projeto"
+              value={atividade.projeto}
+              onChange={(e) =>
+                setAtividade({ ...atividade, projeto: e.target.value })
+              }
+            >
+              {projetos.map((projeto) => (
+                <option key={projeto._id} value={projeto._id}>
+                  {projeto.nome}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>Status</Form.Label>
+            <Form.Select
+              id="status"
+              value={atividade.status}
+              onChange={(e) =>
+                setAtividade({ ...atividade, status: e.target.value })
+              }
+            >
+              <option value="pendente">Pendente</option>
+              <option value="ativo">Ativo</option>
+              <option value="recusado">Recusado</option>
+              <option value="cancelado">Cancelado</option>
+            </Form.Select>
+          </Form.Group>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
         </Form>
       )}
     </div>

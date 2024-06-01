@@ -10,11 +10,15 @@ const loadAtividade = async (_id) => {
   return response.data;
 };
 
-const createAtividade = async (atividade) => {
-  console.log(atividade);
+const saveAtividade = async (atividade) => {
   try {
-    await apiRetaguarda.post("/atividades", atividade);
-    return { success: true, message: "Adicionado com sucesso!" };
+    if (atividade._id) {
+      await apiRetaguarda.patch(`/atividades/${atividade._id}`, atividade);
+      return { success: true, message: "Alterado com sucesso!" };
+    } else {
+      await apiRetaguarda.post("/atividades", atividade);
+      return { success: true, message: "Adicionado com sucesso!" };
+    }
   } catch (error) {
     return { success: false, message: error.response.data };
   }
@@ -32,7 +36,7 @@ const deleteAtividade = async (_id) => {
 const atividadeService = {
   listAtividades,
   loadAtividade,
-  createAtividade,
+  saveAtividade,
   deleteAtividade,
 };
 

@@ -55,21 +55,26 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
                 </InputGroup>
 
                 <InputGroup className="mb-3">
-                  <InputGroup.Text>Tokens por Hora</InputGroup.Text>
+                  <InputGroup.Text>Cor da Etiqueta</InputGroup.Text>
                   <FormControl
-                    type="number"
-                    value={projeto.tokensHora}
-                    onChange={(e) => setProjeto({ ...projeto, tokensHora: e.target.value })}
+                    type="color"
+                    value={projeto.corEtiqueta}
+                    onChange={(e) => setProjeto({ ...projeto, corEtiqueta: e.target.value })}
                   />
                 </InputGroup>
 
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                  <Form.Switch
-                    id="ativo"
-                    label="Ativo"
-                    checked={projeto.ativo}
-                    onChange={(e) => setProjeto({ ...projeto, ativo: e.target.checked })}
-                  />
+                <Form.Group className="mb-3" controlId="formBasicSelect">
+                  <Form.Label>Status</Form.Label>
+                  <Form.Select
+                    id="status"
+                    value={projeto.status}
+                    onChange={(e) => setProjeto({ ...projeto, status: e.target.value })}
+                  >
+                    <option value="pendente">Pendente</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="recusado">Recusado</option>
+                    <option value="cancelado">Cancelado</option>
+                  </Form.Select>
                 </Form.Group>
               </Card.Body>
             </Card>

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Footer from "./components/footer/Footer";
+// import Footer from "./components/footer/Footer";
 // import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import ProjetosPage from "./pages/ProjetosPage";
@@ -12,6 +12,7 @@ import FinanceiroPage from "./pages/FinanceiroPage";
 import CarteiraPage from "./pages/carteira/CarteiraPage";
 import AtividadesPage from "./pages/AtividadesPage";
 import GruposTrabalhoPage from "./pages/GruposTrabalhoPage";
+import HomePage from "./pages/HomePage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -25,7 +26,7 @@ root.render(
             <>
               <Header />
               <Routes>
-                <Route path="/home" element={<CarteiraPage />} />
+                <Route path="/home" element={<HomePage />} />
                 <Route path="/carteira" element={<CarteiraPage />} />
                 <Route path="/consenso" element={<ConsensoPage />} />
                 <Route path="/atividades" element={<AtividadesPage />} />
@@ -34,7 +35,7 @@ root.render(
                 <Route path="/grupos-trabalho" element={<GruposTrabalhoPage />} />
                 <Route path="/projetos" element={<ProjetosPage />} />
               </Routes>
-              <Footer consensosParaVer={3}/>
+              {/* <Footer consensosParaVer={3}/> */}
             </>
           }
         />

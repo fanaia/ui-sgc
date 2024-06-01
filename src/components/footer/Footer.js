@@ -1,6 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CurrencyExchange, HandThumbsUpFill, CheckCircleFill } from "react-bootstrap-icons";
+import {
+  CurrencyExchange,
+  HandThumbsUpFill,
+  CheckCircleFill,
+} from "react-bootstrap-icons";
 import Badge from "react-bootstrap/Badge";
 import "./Footer.css";
 
@@ -17,7 +21,7 @@ const Footer = ({ consensosParaVer }) => {
             </div>
           </li>
           <li>
-            <div className="circle" style={{ position: 'relative' }}>
+            <div className="circle" style={{ position: "relative" }}>
               <Link to="/auth/consenso">
                 <HandThumbsUpFill size={44} />
                 {consensosParaVer > 0 && (
@@ -25,7 +29,7 @@ const Footer = ({ consensosParaVer }) => {
                     pill
                     variant="success"
                     className="position-absolute"
-                    style={{ top: '-5px', right: '-5px' }}
+                    style={{ top: "-5px", right: "-5px" }}
                   >
                     {consensosParaVer}
                   </Badge>
