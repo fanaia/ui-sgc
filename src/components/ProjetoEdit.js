@@ -1,4 +1,9 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import projetoService from "../services/projetoService";
 import { Card, Form, FormControl, InputGroup } from "react-bootstrap";
 
@@ -30,55 +35,70 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <form>
-            <Card className="mb-3">
-              <Card.Header>
-                <Card.Title>Dados do Projeto</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Nome</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={projeto.nome}
-                    onChange={(e) => setProjeto({ ...projeto, nome: e.target.value })}
-                  />
-                </InputGroup>
-
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Descrição</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={projeto.descricao}
-                    onChange={(e) => setProjeto({ ...projeto, descricao: e.target.value })}
-                  />
-                </InputGroup>
-
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Cor da Etiqueta</InputGroup.Text>
-                  <FormControl
-                    type="color"
-                    value={projeto.corEtiqueta}
-                    onChange={(e) => setProjeto({ ...projeto, corEtiqueta: e.target.value })}
-                  />
-                </InputGroup>
-
-                <Form.Group className="mb-3" controlId="formBasicSelect">
-                  <Form.Label>Status</Form.Label>
-                  <Form.Select
-                    id="status"
-                    value={projeto.status}
-                    onChange={(e) => setProjeto({ ...projeto, status: e.target.value })}
-                  >
-                    <option value="pendente">Pendente</option>
-                    <option value="ativo">Ativo</option>
-                    <option value="recusado">Recusado</option>
-                    <option value="cancelado">Cancelado</option>
-                  </Form.Select>
-                </Form.Group>
-              </Card.Body>
-            </Card>
-          </form>
+          <Form>
+            <h1>Dados do Projeto</h1>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Nome do Projeto:
+              </Form.Label>
+              <FormControl
+                type="text"
+                value={projeto.nome}
+                onChange={(e) =>
+                  setProjeto({ ...projeto, nome: e.target.value })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Descrição:
+              </Form.Label>
+              <FormControl
+                type="text"
+                value={projeto.descricao}
+                onChange={(e) =>
+                  setProjeto({ ...projeto, descricao: e.target.value })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Cor da Etiqueta:
+              </Form.Label>
+              <FormControl
+                className="w-100"
+                type="color"
+                value={projeto.corEtiqueta}
+                onChange={(e) =>
+                  setProjeto({ ...projeto, corEtiqueta: e.target.value })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>Status:</Form.Label>
+              <Form.Select
+                id="status"
+                value={projeto.status}
+                onChange={(e) =>
+                  setProjeto({ ...projeto, status: e.target.value })
+                }
+              >
+                <option value="pendente">Pendente</option>
+                <option value="ativo">Ativo</option>
+                <option value="recusado">Recusado</option>
+                <option value="cancelado">Cancelado</option>
+              </Form.Select>
+            </Form.Group>
+          </Form>
         </div>
       </div>
     </div>
