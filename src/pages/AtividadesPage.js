@@ -123,6 +123,8 @@ const AtividadesPage = () => {
                 margin: "10px",
                 borderLeft: `10px solid ${atividade.corEtiqueta}`,
                 cursor: "pointer",
+                opacity:
+                  atividade.status === "cancelado" || atividade.status === "recusado" ? 0.5 : 1,
               }}
               onClick={() => handleEdit(atividade._id)}
             >
