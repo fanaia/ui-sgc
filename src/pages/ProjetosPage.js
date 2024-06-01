@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Form, Modal, Button, ButtonGroup } from "react-bootstrap";
+import { Form, Modal, Button, ButtonGroup, Card } from "react-bootstrap";
 import projetoService from "../services/projetoService";
 import ProjetoEdit from "../components/ProjetoEdit";
 
@@ -74,18 +74,11 @@ const ProjetosPage = () => {
         <Button onClick={handleAdd} className="btn btn-primary mb-3">
           Adicionar Projeto
         </Button>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th className="d-none d-md-table-cell">Ativo</th>
-              <th className="d-none d-md-table-cell"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {projetos.map((projeto) => (
-              <tr key={projeto._id}>
-                <td>
+        <div className="d-flex flex-wrap">
+          {projetos.map((projeto) => (
+            <Card key={projeto._id} style={{ width: "18rem", margin: "10px" }}>
+              <Card.Body>
+                <Card.Title>
                   <button
                     type="button"
                     className="btn btn-link"
@@ -93,24 +86,11 @@ const ProjetosPage = () => {
                   >
                     {projeto.nome}
                   </button>
-                </td>
-                <td className="d-none d-md-table-cell">
-                  <Form.Check
-                    type="switch"
-                    id={`ativo-${projeto._id}`}
-                    checked={projeto.ativo}
-                    onChange={() => toggleAtivo(projeto._id, !projeto.ativo)}
-                  />
-                </td>
-                <td className="d-none d-md-table-cell">
-                  <Button variant="danger" onClick={() => askForDeleteConfirmation(projeto._id)}>
-                    Excluir
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                </Card.Title>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
