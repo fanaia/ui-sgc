@@ -18,7 +18,7 @@ const Login = () => {
       const tokenJwt = response.data.tokenJwt;
       localStorage.setItem("tokenJwt", tokenJwt);
 
-      navigate("/auth/carteira");
+      navigate("/auth/home");
     } catch (error) {
       setMsg(error.message);
       console.log(error.message);
@@ -31,9 +31,7 @@ const Login = () => {
         <div className="col-md-6">
           <div className="card mt-5 shadow-lg">
             <div className="card-body">
-              <h2 className="text-center mb-4">
-                CS pix-conta
-              </h2>
+              <h2 className="text-center mb-4">CS pix-conta</h2>
               <h3 className="text-center mb-4">Autenticação</h3>
               {msg && (
                 <div className="alert alert-danger" role="alert">
@@ -43,11 +41,21 @@ const Login = () => {
               <form onSubmit={handleSubmit}>
                 <div className="form-group mb-4">
                   <label htmlFor="whatsapp">Whatsapp</label>
-                  <input type="whatsapp" id="whatsapp" name="whatsapp" className="form-control" />
+                  <input
+                    type="whatsapp"
+                    id="whatsapp"
+                    name="whatsapp"
+                    className="form-control"
+                  />
                 </div>
                 <div className="form-group mb-4">
                   <label htmlFor="senha">Senha</label>
-                  <input type="password" id="senha" name="senha" className="form-control" />
+                  <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    className="form-control"
+                  />
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">
                   Entrar
