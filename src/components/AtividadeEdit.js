@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import { jwtDecode } from "jwt-decode";
+import { format } from "date-fns";
 import projetoService from "../services/projetoService";
 import atividadeService from "../services/atividadeService";
 import { Card, Form } from "react-bootstrap";
@@ -64,10 +65,10 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
       ...atividade,
       totalTokens: atividade.totalHoras * tokenHora,
       participante: participanteId,
-      projeto: selectedProjeto._id,
-      grupoTrabalho: selectedGrupoTrabalho._id,
+      projeto: atividade.projeto._id,
+      grupoTrabalho: atividade.grupoTrabalho._id,
     };
-    return atividadeService.createAtividade(newAtividade);
+    return atividadeService.saveAtividade(newAtividade);
   };
 
   useEffect(() => {
@@ -139,7 +140,7 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
             <Form.Control
               type="date"
               name="dataRealizacao"
-              value={atividade.dataRealizacao}
+              value={format(new Date(atividade.dataRealizacao), "yyyy-MM-dd")}
               onChange={handleChange}
             />
           </Form.Group>
@@ -160,6 +161,50 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
             <Form.Label style={{ marginBottom: "2px" }}>
               Token/Hora: <strong>{tokenHora}</strong>
             </Form.Label>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicSelect">
+            <Form.Label>
+              Grupo de Trabalho
+            </Form.Label>
+            <Form.Select
+              id="grupo"
+              value={atividade.grupoTrabalho}
+              onChange={(e) => setAtividade({ ...atividade, grupoTrabalho: e.target.value })}
+            >
+              {gruposTrabalho.map((grupo) => (
+                <option key={grupo._id} value={grupo._id}>
+                  {grupo.nome}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicSelect">
+            <Form.Label>Projeto</Form.Label>
+            <Form.Select
+              id="projeto"
+              value={atividade.projeto}
+              onChange={(e) => setAtividade({ ...atividade, projeto: e.target.value })}
+            >
+              {projetos.map((projeto) => (
+                <option key={projeto._id} value={projeto._id}>
+                  {projeto.nome}
+                </option>
+              ))}
+            </Form.Select>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicSelect">
+            <Form.Label>Status</Form.Label>
+            <Form.Select
+              id="status"
+              value={atividade.status}
+              onChange={(e) => setAtividade({ ...atividade, status: e.target.value })}
+            >
+              <option value="pendente">Pendente</option>
+              <option value="ativo">Ativo</option>
+              <option value="recusado">Recusado</option>
+              <option value="cancelado">Cancelado</option>
+            </Form.Select>
           </Form.Group>
 
           <div style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}></div>
