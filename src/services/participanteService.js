@@ -36,19 +36,18 @@ const deleteParticipante = async (_id) => {
   }
 };
 
-const setAtivo = async (_id, ativo) => {
-  const response = await apiRetaguarda.patch(`/participantes/${_id}`, {
-    ativo,
-  });
-  return response.data;
-};
+// const setAtivo = async (_id, ativo) => {
+//   const response = await apiRetaguarda.patch(`/participantes/${_id}`, {
+//     ativo,
+//   });
+//   return response.data;
+// };
 
 const participanteService = {
   listParticipantes,
   loadParticipante,
   saveParticipante,
-  deleteParticipante,
-  setAtivo,
+  deleteParticipante
 };
 
 export default participanteService;

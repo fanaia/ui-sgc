@@ -21,7 +21,7 @@ const Login = () => {
       navigate("/auth/carteira");
     } catch (error) {
       setMsg(error.message);
-      console.error("Falha na autenticação", error);
+      console.log(error.message);
     }
   };
 

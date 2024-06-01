@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Form, Modal, Button, ButtonGroup } from "react-bootstrap";
+import { Form, Modal, Button, ButtonGroup, Card } from "react-bootstrap";
 import grupoTrabalhoService from "../services/grupoTrabalhoService";
 import GrupoTrabalhoEdit from "../components/GrupoTrabalhoEdit";
 import participanteService from "../services/participanteService";
@@ -20,13 +20,18 @@ const GruposTrabalhoPage = () => {
   }, []);
 
   const fetchData = async () => {
-    grupoTrabalhoService
-      .listGruposTrabalho()
-      .then((data) => setGruposTrabalho(data.map((item) => ({ ...item }))));
+    let gruposTrabalho = await grupoTrabalhoService.listGruposTrabalho();
 
-    participanteService
-      .listParticipantes()
-      .then((data) => setParticipantes(data.map((item) => ({ ...item }))));
+    gruposTrabalho = await Promise.all(
+      gruposTrabalho.map(async (grupo) => {
+        const participante = await participanteService.loadParticipante(
+          grupo.participanteResponsavel
+        );
+        return { ...grupo, participanteResponsavel: participante };
+      })
+    );
+
+    setGruposTrabalho(gruposTrabalho);
   };
 
   // const toggleAtivo = async (_id, value) => {
@@ -78,46 +83,40 @@ const GruposTrabalhoPage = () => {
             {JSON.stringify(msg.message)}
           </div>
         )}
-        <h1 className="my-4">Grupos de Trabalho</h1>
-        <Button variant="primary" onClick={handleAdd}>
-          Adicionar Grupo de Trabalho
-        </Button>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Descrição</th>
-              <th>Ativo</th>
-              <th>Participante Responsável</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {gruposTrabalho.map((grupoTrabalho) => (
-              <tr key={grupoTrabalho._id}>
-                <td>{grupoTrabalho.nome}</td>
-                <td>{grupoTrabalho.descricao}</td>
-                <td>
-                  <Form.Check type="checkbox" checked={grupoTrabalho.ativo} enabled={false} />
-                </td>
-                <td>{grupoTrabalho.participanteResponsavel}</td>
-                <td>
-                  <ButtonGroup>
-                    <Button variant="secondary" onClick={() => handleEdit(grupoTrabalho._id)}>
-                      Editar
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => askForDeleteConfirmation(grupoTrabalho._id)}
-                    >
-                      Excluir
-                    </Button>
-                  </ButtonGroup>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="d-flex justify-content-between align-items-center my-1">
+          <h1>Grupo Trabalho</h1>
+          <Button onClick={handleAdd} className="btn btn-primary mb-3">
+            Adicionar
+          </Button>
+        </div>
+        <div className="d-flex flex-wrap">
+          {gruposTrabalho.map((grupoTrabalho) => (
+            <Card
+              key={grupoTrabalho._id}
+              style={{
+                width: "100%",
+                margin: "10px",
+                borderLeft: `10px solid ${grupoTrabalho.corEtiqueta}`,
+                cursor: "pointer",
+              }}
+              onClick={() => handleEdit(grupoTrabalho._id)}
+            >
+              <Card.Body>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>{grupoTrabalho.nome}</label>
+                </div>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer" }}>
+                    Responsável: {grupoTrabalho.participanteResponsavel ? grupoTrabalho.participanteResponsavel.nome : 'Carregando...'}
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer" }}>Status: {grupoTrabalho.status}</label>
+                </div>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
       </div>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>

@@ -63,6 +63,16 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
                   />
                 </InputGroup>
                 <InputGroup className="mb-3">
+                  <InputGroup.Text>Cor da Etiqueta</InputGroup.Text>
+                  <FormControl
+                    type="color"
+                    value={grupoTrabalho.corEtiqueta}
+                    onChange={(e) =>
+                      setGrupoTrabalho({ ...grupoTrabalho, corEtiqueta: e.target.value })
+                    }
+                  />
+                </InputGroup>
+                <InputGroup className="mb-3">
                   <InputGroup.Text>Ativo</InputGroup.Text>
                   <Form.Check
                     type="checkbox"

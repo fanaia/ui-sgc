@@ -18,15 +18,13 @@ const ProjetosPage = () => {
   }, []);
 
   const fetchData = async () => {
-    projetoService
-      .listProjetos()
-      .then((data) => setProjetos(data.map((item) => ({ ...item }))));
+    projetoService.listProjetos().then((data) => setProjetos(data.map((item) => ({ ...item }))));
   };
 
-  const toggleAtivo = async (_id, value) => {
-    await projetoService.setAtivo(_id, value);
-    fetchData();
-  };
+  // const toggleAtivo = async (_id, value) => {
+  //   await projetoService.setAtivo(_id, value);
+  //   fetchData();
+  // };
 
   const handleEdit = (_id) => {
     setSelectedId(_id);
@@ -68,10 +66,7 @@ const ProjetosPage = () => {
     <>
       <div className="container">
         {msg && (
-          <div
-            className={`alert alert-${msg.success ? "info" : "danger"}`}
-            role="alert"
-          >
+          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
             {JSON.stringify(msg.message)}
           </div>
         )}
@@ -95,12 +90,10 @@ const ProjetosPage = () => {
             >
               <Card.Body>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>{projeto.nome}</label>
+                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>{projeto.nome}</label>
                 </div>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>
-                    Ativo: {projeto.ativo}
-                  </label>
+                  <label style={{ cursor: "pointer" }}>Status: {projeto.status}</label>
                 </div>
               </Card.Body>
             </Card>
@@ -109,13 +102,9 @@ const ProjetosPage = () => {
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>
-            {selectedId > 0 ? "Alterar Projeto" : "Adicionar Projeto"}
-          </Modal.Title>
+          <Modal.Title>{selectedId > 0 ? "Alterar Projeto" : "Adicionar Projeto"}</Modal.Title>
         </Modal.Header>
-        <Modal.Body
-          style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}
-        >
+        <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
           <ProjetoEdit ref={projetoEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
@@ -143,10 +132,7 @@ const ProjetosPage = () => {
         </Modal.Header>
         <Modal.Body>Tem certeza que deseja excluir este Projeto?</Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowConfirmModal(false)}
-          >
+          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>
