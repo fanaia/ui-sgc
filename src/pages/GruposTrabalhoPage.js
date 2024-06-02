@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Modal, Button, ButtonGroup, Card } from "react-bootstrap";
+import { BsPlusCircleFill } from "react-icons/bs";
 import grupoTrabalhoService from "../services/grupoTrabalhoService";
 import GrupoTrabalhoEdit from "../components/GrupoTrabalhoEdit";
 import participanteService from "../services/participanteService";
@@ -51,11 +52,13 @@ const GruposTrabalhoPage = () => {
   };
 
   const handleDelete = () => {
-    grupoTrabalhoService.deleteGrupoTrabalho(grupoTrabalhoIdToDelete).then((response) => {
-      setShowModal(false);
-      setMsg(response);
-      fetchData();
-    });
+    grupoTrabalhoService
+      .deleteGrupoTrabalho(grupoTrabalhoIdToDelete)
+      .then((response) => {
+        setShowModal(false);
+        setMsg(response);
+        fetchData();
+      });
     setShowConfirmModal(false);
   };
 
@@ -79,14 +82,21 @@ const GruposTrabalhoPage = () => {
     <>
       <div className="container">
         {msg && (
-          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
+          <div
+            className={`alert alert-${msg.success ? "info" : "danger"}`}
+            role="alert"
+          >
             {JSON.stringify(msg.message)}
           </div>
         )}
         <div className="d-flex justify-content-between align-items-center my-1">
           <h1>Grupo Trabalho</h1>
-          <Button onClick={handleAdd} className="btn btn-primary mb-3">
-            Adicionar
+          <Button
+            onClick={handleAdd}
+            className="btn btn-link mb-3 border-0 btn-no-hover btn-outline-none"
+            style={{ fontSize: "35px", backgroundColor: "transparent" }}
+          >
+            <BsPlusCircleFill />
           </Button>
         </div>
         <div className="d-flex flex-wrap">
@@ -103,15 +113,24 @@ const GruposTrabalhoPage = () => {
             >
               <Card.Body>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>{grupoTrabalho.nome}</label>
-                </div>
-                <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>
-                    Responsável: {grupoTrabalho.participanteResponsavel ? grupoTrabalho.participanteResponsavel.nome : 'Carregando...'}
+                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>
+                    {grupoTrabalho.nome}
                   </label>
                 </div>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>Status: {grupoTrabalho.status}</label>
+                  <label style={{ cursor: "pointer" }}>
+                    Responsável:{" "}
+                    {grupoTrabalho.participanteResponsavel
+                      ? grupoTrabalho.participanteResponsavel.nome
+                      : "Carregando..."}
+                  </label>
+                </div>
+                <div className="mt-2">
+                  <label style={{ cursor: "pointer" }}>
+                    Status:{" "}
+                    {grupoTrabalho.status.charAt(0).toUpperCase() +
+                      grupoTrabalho.status.slice(1)}
+                  </label>
                 </div>
               </Card.Body>
             </Card>
@@ -138,9 +157,14 @@ const GruposTrabalhoPage = () => {
         <Modal.Header closeButton>
           <Modal.Title>Confirmação de Exclusão</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Você tem certeza que deseja excluir este grupo de trabalho?</Modal.Body>
+        <Modal.Body>
+          Você tem certeza que deseja excluir este grupo de trabalho?
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmModal(false)}
+          >
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>

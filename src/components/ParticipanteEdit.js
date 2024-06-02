@@ -1,4 +1,9 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import participanteService from "../services/participanteService";
 import { Card, Form, FormControl, InputGroup } from "react-bootstrap";
 
@@ -31,86 +36,118 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
     <div className="container">
       <div className="row">
         <div className="col">
-          <form>
-            <Card className="mb-3">
-              <Card.Header>
-                <Card.Title>Dados do Participante</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Nome</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={participante.nome}
-                    onChange={(e) => setParticipante({ ...participante, nome: e.target.value })}
-                  />
-                </InputGroup>
-
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Whatsapp</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={participante.whatsapp}
-                    onChange={(e) => setParticipante({ ...participante, whatsapp: e.target.value })}
-                  />
-                </InputGroup>
-
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Senha</InputGroup.Text>
-                  <FormControl
-                    type="password"
-                    value={participante.senha}
-                    onChange={(e) => setParticipante({ ...participante, senha: e.target.value })}
-                  />
-                </InputGroup>
-
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Documento</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={participante.documento}
-                    onChange={(e) =>
-                      setParticipante({ ...participante, documento: e.target.value })
-                    }
-                  />
-                </InputGroup>
-
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Chave Pix</InputGroup.Text>
-                  <FormControl
-                    type="text"
-                    value={participante.chavePix}
-                    onChange={(e) => setParticipante({ ...participante, chavePix: e.target.value })}
-                  />
-                </InputGroup>
-
-                <InputGroup className="mb-3">
-                  <InputGroup.Text>Token Hora</InputGroup.Text>
-                  <FormControl
-                    type="number"
-                    value={participante.tokenHora || ""}
-                    onChange={(e) =>
-                      setParticipante({ ...participante, tokenHora: e.target.value })
-                    }
-                  />
-                </InputGroup>
-
-                <Form.Group className="mb-3" controlId="formBasicSelect">
-                  <Form.Label>Status</Form.Label>
-                  <Form.Select
-                    id="status"
-                    value={participante.status}
-                    onChange={(e) => setParticipante({ ...participante, status: e.target.value })}
-                  >
-                    <option value="pendente">Pendente</option>
-                    <option value="ativo">Ativo</option>
-                    <option value="recusado">Recusado</option>
-                    <option value="cancelado">Cancelado</option>
-                  </Form.Select>
-                </Form.Group>
-              </Card.Body>
-            </Card>
-          </form>
+          <Form>
+            <h1>Dados do Participante</h1>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>Nome</Form.Label>
+              <FormControl
+                type="text"
+                value={participante.nome}
+                onChange={(e) =>
+                  setParticipante({ ...participante, nome: e.target.value })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Quando foi feito?
+              </Form.Label>
+              <FormControl
+                type="text"
+                value={participante.whatsapp}
+                onChange={(e) =>
+                  setParticipante({ ...participante, whatsapp: e.target.value })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Quantas horas você dedicou nessa atividade?
+              </Form.Label>
+              <FormControl
+                type="password"
+                value={participante.senha}
+                onChange={(e) =>
+                  setParticipante({ ...participante, senha: e.target.value })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Documento:
+              </Form.Label>
+              <FormControl
+                type="text"
+                value={participante.documento}
+                onChange={(e) =>
+                  setParticipante({
+                    ...participante,
+                    documento: e.target.value,
+                  })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Chave Pix:
+              </Form.Label>
+              <FormControl
+                type="text"
+                value={participante.chavePix}
+                onChange={(e) =>
+                  setParticipante({ ...participante, chavePix: e.target.value })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Token hora
+              </Form.Label>
+              <FormControl
+                type="number"
+                value={participante.tokenHora || ""}
+                onChange={(e) =>
+                  setParticipante({
+                    ...participante,
+                    tokenHora: e.target.value,
+                  })
+                }
+              />
+            </Form.Group>
+            <div
+              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+            ></div>
+            <Form.Group style={{ marginBottom: "5px" }}>
+              <Form.Label style={{ marginBottom: "2px" }}>Status:</Form.Label>
+              <Form.Select
+                id="status"
+                value={participante.status}
+                onChange={(e) =>
+                  setParticipante({ ...participante, status: e.target.value })
+                }
+              >
+                <option value="pendente">Pendente</option>
+                <option value="ativo">Ativo</option>
+                <option value="recusado">Recusado</option>
+                <option value="cancelado">Cancelado</option>
+              </Form.Select>
+            </Form.Group>
+          </Form>
         </div>
       </div>
     </div>

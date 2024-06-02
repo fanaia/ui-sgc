@@ -32,7 +32,10 @@ root.render(
                 <Route path="/atividades" element={<AtividadesPage />} />
                 <Route path="/participantes" element={<ParticipantesPage />} />
                 <Route path="/financeiro" element={<FinanceiroPage />} />
-                <Route path="/grupos-trabalho" element={<GruposTrabalhoPage />} />
+                <Route
+                  path="/grupos-trabalho"
+                  element={<GruposTrabalhoPage />}
+                />
                 <Route path="/projetos" element={<ProjetosPage />} />
               </Routes>
               {/* <Footer consensosParaVer={3}/> */}

@@ -181,13 +181,12 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
               Token/Hora: <strong>{tokenHora}</strong>
             </Form.Label>
           </Form.Group>
-
           <div
             style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
           ></div>
           <Form.Group style={{ marginBottom: "5px" }}>
             <Form.Label style={{ marginBottom: "2px" }}>
-              Grupo de Trabalho
+              Grupo de Trabalho:
             </Form.Label>
             <Form.Select
               id="grupo"
@@ -207,7 +206,7 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
             style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
           ></div>
           <Form.Group style={{ marginBottom: "5px" }}>
-            <Form.Label style={{ marginBottom: "2px" }}>Projeto</Form.Label>
+            <Form.Label style={{ marginBottom: "2px" }}>Projeto:</Form.Label>
             <Form.Select
               id="projeto"
               value={atividade.projeto}
@@ -226,7 +225,21 @@ const AtividadeEdit = forwardRef(({ _id }, ref) => {
             style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
           ></div>
           <Form.Group style={{ marginBottom: "5px" }}>
-            <Form.Label style={{ marginBottom: "2px" }}>Status</Form.Label>
+            <Form.Label style={{ marginBottom: "2px" }}>
+              Participante Inclusão:
+            </Form.Label>
+            <Form.Control
+              type="string"
+              name="participanteInclusao"
+              value={atividade.participanteInclusao || ""}
+              readOnly
+            />
+          </Form.Group>
+          <div
+            style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
+          ></div>
+          <Form.Group style={{ marginBottom: "5px" }}>
+            <Form.Label style={{ marginBottom: "2px" }}>Status:</Form.Label>
             <Form.Select
               id="status"
               value={atividade.status}

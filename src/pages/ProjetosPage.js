@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Form, Modal, Button, ButtonGroup, Card } from "react-bootstrap";
+import { BsPlusCircleFill } from "react-icons/bs";
 import projetoService from "../services/projetoService";
 import ProjetoEdit from "../components/ProjetoEdit";
 
@@ -18,7 +19,9 @@ const ProjetosPage = () => {
   }, []);
 
   const fetchData = async () => {
-    projetoService.listProjetos().then((data) => setProjetos(data.map((item) => ({ ...item }))));
+    projetoService
+      .listProjetos()
+      .then((data) => setProjetos(data.map((item) => ({ ...item }))));
   };
 
   // const toggleAtivo = async (_id, value) => {
@@ -66,14 +69,21 @@ const ProjetosPage = () => {
     <>
       <div className="container">
         {msg && (
-          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
+          <div
+            className={`alert alert-${msg.success ? "info" : "danger"}`}
+            role="alert"
+          >
             {JSON.stringify(msg.message)}
           </div>
         )}
         <div className="d-flex justify-content-between align-items-center my-1">
-          <h1>Projetos</h1>
-          <Button onClick={handleAdd} className="btn btn-primary mb-3">
-            Adicionar
+          <h1 style={{ marginLeft: "10px" }}>Projetos</h1>
+          <Button
+            onClick={handleAdd}
+            className="btn btn-link mb-3 border-0 btn-no-hover btn-outline-none"
+            style={{ fontSize: "35px", backgroundColor: "transparent" }}
+          >
+            <BsPlusCircleFill />
           </Button>
         </div>
         <div className="d-flex flex-wrap">
@@ -90,10 +100,16 @@ const ProjetosPage = () => {
             >
               <Card.Body>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>{projeto.nome}</label>
+                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>
+                    {projeto.nome}
+                  </label>
                 </div>
                 <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>Status: {projeto.status}</label>
+                  <label style={{ cursor: "pointer" }}>
+                    Status:{" "}
+                    {projeto.status.charAt(0).toUpperCase() +
+                      projeto.status.slice(1)}
+                  </label>
                 </div>
               </Card.Body>
             </Card>
@@ -102,9 +118,13 @@ const ProjetosPage = () => {
       </div>
       <Modal show={showModal} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>{selectedId > 0 ? "Alterar Projeto" : "Adicionar Projeto"}</Modal.Title>
+          <Modal.Title>
+            {selectedId > 0 ? "Alterar Projeto" : "Adicionar Projeto"}
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
+        <Modal.Body
+          style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}
+        >
           <ProjetoEdit ref={projetoEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
@@ -132,7 +152,10 @@ const ProjetosPage = () => {
         </Modal.Header>
         <Modal.Body>Tem certeza que deseja excluir este Projeto?</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmModal(false)}
+          >
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>
