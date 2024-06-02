@@ -3,6 +3,7 @@ import { Form, Modal, Button, ButtonGroup, Card } from "react-bootstrap";
 import { BsPlusCircleFill } from "react-icons/bs";
 import projetoService from "../services/projetoService";
 import ProjetoEdit from "../components/ProjetoEdit";
+import ProjetoCard from "../components/ProjetoCard";
 
 const ProjetosPage = () => {
   const [msg, setMsg] = useState();
@@ -88,31 +89,11 @@ const ProjetosPage = () => {
         </div>
         <div className="d-flex flex-wrap">
           {projetos.map((projeto) => (
-            <Card
+            <ProjetoCard
               key={projeto._id}
-              style={{
-                width: "100%",
-                margin: "10px",
-                borderLeft: `10px solid ${projeto.corEtiqueta}`,
-                cursor: "pointer",
-              }}
-              onClick={() => handleEdit(projeto._id)}
-            >
-              <Card.Body>
-                <div className="mt-2">
-                  <label style={{ cursor: "pointer", fontWeight: "bold" }}>
-                    {projeto.nome}
-                  </label>
-                </div>
-                <div className="mt-2">
-                  <label style={{ cursor: "pointer" }}>
-                    Status:{" "}
-                    {projeto.status.charAt(0).toUpperCase() +
-                      projeto.status.slice(1)}
-                  </label>
-                </div>
-              </Card.Body>
-            </Card>
+              projeto={projeto}
+              handleEdit={handleEdit}
+            />
           ))}
         </div>
       </div>
@@ -129,7 +110,7 @@ const ProjetosPage = () => {
         </Modal.Body>
         <Modal.Footer>
           <ButtonGroup>
-            <Button variant="primary" onClick={handleSave}>
+            <Button variant="success" onClick={handleSave}>
               Salvar
             </Button>
             <Button variant="secondary" onClick={handleClose}>
