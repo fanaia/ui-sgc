@@ -20,9 +20,7 @@ function HomePage() {
         </Card.Header>
         <Card.Body>
           <Card.Text style={{ display: "flex", alignItems: "center" }}>
-            <strong style={{ fontSize: "1.2em" }}>
-              4.200 PIX / R$ 336.000,00
-            </strong>
+            <strong style={{ fontSize: "1.2em" }}>4.200 PIX / R$ 336.000,00</strong>
           </Card.Text>
         </Card.Body>
       </Card>
@@ -33,8 +31,7 @@ function HomePage() {
         </Card.Header>
         <Card.Body>
           <Card.Text style={{ display: "flex", alignItems: "center" }}>
-            <strong style={{ fontSize: "1.2em" }}>R$ 13.450,00</strong> - 3
-            meses
+            <strong style={{ fontSize: "1.2em" }}>R$ 13.450,00</strong> - 3 meses
           </Card.Text>
         </Card.Body>
       </Card>
@@ -44,8 +41,7 @@ function HomePage() {
         </Card.Header>
         <Card.Body>
           <Card.Text style={{ display: "flex", alignItems: "center" }}>
-            <strong style={{ fontSize: "1.2em" }}>R$ 13.450,00</strong> - 340
-            PIX
+            <strong style={{ fontSize: "1.2em" }}>R$ 13.450,00</strong> - 340 PIX
           </Card.Text>
         </Card.Body>
       </Card>
