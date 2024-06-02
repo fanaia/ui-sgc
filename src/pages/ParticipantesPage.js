@@ -37,11 +37,13 @@ const ParticipantesPage = () => {
   };
 
   const handleDelete = () => {
-    participanteService.deleteParticipante(participanteIdToDelete).then((response) => {
-      setShowModal(false);
-      setMsg(response);
-      fetchData();
-    });
+    participanteService
+      .deleteParticipante(participanteIdToDelete)
+      .then((response) => {
+        setShowModal(false);
+        setMsg(response);
+        fetchData();
+      });
     setShowConfirmModal(false);
   };
 
@@ -65,7 +67,10 @@ const ParticipantesPage = () => {
     <>
       <div className="container">
         {msg && (
-          <div className={`alert alert-${msg.success ? "info" : "danger"}`} role="alert">
+          <div
+            className={`alert alert-${msg.success ? "info" : "danger"}`}
+            role="alert"
+          >
             {JSON.stringify(msg.message)}
           </div>
         )}
@@ -81,7 +86,10 @@ const ParticipantesPage = () => {
         </div>
         <div className="d-flex flex-wrap justify-content-start">
           {participantes.map((participante) => (
-            <ParticipanteCard participante={participante} handleEdit={handleEdit} />
+            <ParticipanteCard
+              participante={participante}
+              handleEdit={handleEdit}
+            />
           ))}
         </div>
       </div>
@@ -91,12 +99,14 @@ const ParticipantesPage = () => {
             {selectedId > 0 ? "Alterar Participante" : "Adicionar Participante"}
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
+        <Modal.Body
+          style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}
+        >
           <ParticipanteEdit ref={participanteEditRef} _id={selectedId} />
         </Modal.Body>
         <Modal.Footer>
           <ButtonGroup>
-            <Button variant="primary" onClick={handleSave}>
+            <Button variant="success" onClick={handleSave}>
               Salvar
             </Button>
             <Button variant="secondary" onClick={handleClose}>
@@ -117,9 +127,14 @@ const ParticipantesPage = () => {
         <Modal.Header closeButton>
           <Modal.Title>Confirmação de exclusão</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Tem certeza que deseja excluir este Participante?</Modal.Body>
+        <Modal.Body>
+          Tem certeza que deseja excluir este Participante?
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowConfirmModal(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => setShowConfirmModal(false)}
+          >
             Cancelar
           </Button>
           <Button variant="danger" onClick={handleDelete}>
