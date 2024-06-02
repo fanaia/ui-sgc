@@ -28,7 +28,7 @@ function CarteiraPage() {
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Card.Title>
               <strong>Valor Tempo</strong>
-              <div style={{ fontSize: "0.8em" }}>Cotação Jussara (JSR)</div>
+              <div style={{ fontSize: "0.8em" }}>Cotação pix-Conta (PIX)</div>
             </Card.Title>
             <Card.Text style={{ display: "flex", alignItems: "center" }}>
               <strong style={{ fontSize: "1.2em" }}>
@@ -50,7 +50,7 @@ function CarteiraPage() {
               <strong>Saldo Pessoal</strong>
             </Card.Title>
             <Card.Text>
-              <strong style={{ fontSize: "1.2em" }}>{saldoToken} JSR</strong>
+              <strong style={{ fontSize: "1.2em" }}>{saldoToken} PIX</strong>
               <div style={{ fontSize: "0.8em" }}>
                 R${" "}
                 {(saldoToken * cotacaoToken).toLocaleString("pt-BR", {
