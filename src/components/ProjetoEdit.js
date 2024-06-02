@@ -36,7 +36,6 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
       <div className="row">
         <div className="col">
           <Form>
-            <h1>Dados do Projeto</h1>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>
                 Nome do Projeto:
@@ -49,9 +48,6 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>
                 Descrição:
@@ -64,9 +60,6 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>
                 Cor da Etiqueta:
@@ -80,9 +73,6 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>Status:</Form.Label>
               <Form.Select
