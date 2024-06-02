@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React from "react";
+import { Card } from "react-bootstrap";
 
 const ParticipanteCard = ({ participante, handleEdit }) => {
   return (
@@ -9,18 +9,27 @@ const ParticipanteCard = ({ participante, handleEdit }) => {
         width: "100%",
         margin: "10px",
         cursor: "pointer",
-        borderLeft: "8px solid darkblue",
+        borderLeft:
+          participante.status === "pendente"
+            ? "8px solid yellow"
+            : participante.status === "cancelado" ||
+              participante.status === "recusado"
+            ? "8px solid red"
+            : participante.status === "ativo"
+            ? "8px solid green"
+            : "",
+        opacity:
+          participante.status === "cancelado" ||
+          participante.status === "recusado"
+            ? 0.7
+            : 1,
       }}
       onClick={() => handleEdit(participante._id)}
     >
-      <Card.Header
-        style={{ backgroundColor: "#ffffff", fontWeight: "bold" }}
-      >
+      <Card.Header style={{ backgroundColor: "#ffffff", fontWeight: "bold" }}>
         {participante.nome}
       </Card.Header>
-      <Card.Body
-        style={{ fontSize: "calc(1em - 3px)", fontStyle: "italic" }}
-      >
+      <Card.Body style={{ fontSize: "calc(1em - 3px)", fontStyle: "italic" }}>
         <div className="row">
           <div className="col">
             <Card.Text>
