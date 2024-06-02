@@ -37,7 +37,6 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
       <div className="row">
         <div className="col">
           <Form>
-            <h1>Dados do Participante</h1>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>Nome</Form.Label>
               <FormControl
@@ -48,13 +47,8 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
-              <Form.Label style={{ marginBottom: "2px" }}>
-                Quando foi feito?
-              </Form.Label>
+              <Form.Label style={{ marginBottom: "2px" }}>Whatsapp:</Form.Label>
               <FormControl
                 type="text"
                 value={participante.whatsapp}
@@ -63,13 +57,8 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
-              <Form.Label style={{ marginBottom: "2px" }}>
-                Quantas horas você dedicou nessa atividade?
-              </Form.Label>
+              <Form.Label style={{ marginBottom: "2px" }}>Senha:</Form.Label>
               <FormControl
                 type="password"
                 value={participante.senha}
@@ -78,9 +67,6 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>
                 Documento:
@@ -96,9 +82,6 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>
                 Chave Pix:
@@ -111,12 +94,9 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>
-                Token hora
+                Token hora:
               </Form.Label>
               <FormControl
                 type="number"
@@ -129,9 +109,6 @@ const ParticipanteEdit = forwardRef(({ _id }, ref) => {
                 }
               />
             </Form.Group>
-            <div
-              style={{ borderBottom: "1px solid #ddd", margin: "10px 0" }}
-            ></div>
             <Form.Group style={{ marginBottom: "5px" }}>
               <Form.Label style={{ marginBottom: "2px" }}>Status:</Form.Label>
               <Form.Select
