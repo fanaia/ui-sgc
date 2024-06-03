@@ -1,150 +1,62 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Form, Modal, Button, ButtonGroup, Card } from "react-bootstrap";
-import { BsPlusCircleFill } from "react-icons/bs";
-import grupoTrabalhoService from "../services/grupoTrabalhoService";
-import GrupoTrabalhoEdit from "../components/GrupoTrabalhoEdit";
-import GrupoTrabalhoCard from "../components/GrupoTrabalhoCard";
-import participanteService from "../services/participanteService";
+// GruposTrabalhoPage.js
+import React, { useState, useEffect, useContext } from "react";
+import MessageContext from "../contexts/MessageContext";
+import { CrudProvider } from "../contexts/CrudContext";
+import apiRetaguarda from "../config/apiRetaguarda";
+import ListItem from "../components/crud/ListItem";
+import EditModal from "../components/crud/EditModal";
+import GrupoTrabalhoCard from "../components/grupoTrabalho/GrupoTrabalhoCard";
+import GrupoTrabalhoEdit from "../components/grupoTrabalho/GrupoTrabalhoEdit";
 
 const GruposTrabalhoPage = () => {
-  const [msg, setMsg] = useState();
+  const { addMessage } = useContext(MessageContext);
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
-  const [participantes, setParticipantes] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [grupoTrabalhoIdToDelete, setGrupoTrabalhoIdToDelete] = useState(null);
-
-  const grupoTrabalhoEditRef = useRef();
 
   useEffect(() => {
-    fetchData();
+    fetchItens();
   }, []);
 
-  const fetchData = async () => {
-    let gruposTrabalho = await grupoTrabalhoService.listGruposTrabalho();
-
-    gruposTrabalho = await Promise.all(
-      gruposTrabalho.map(async (grupo) => {
-        const participante = await participanteService.loadParticipante(
-          grupo.participanteResponsavel
-        );
-        return { ...grupo, participanteResponsavel: participante };
-      })
-    );
-
-    setGruposTrabalho(gruposTrabalho);
+  const fetchItens = async () => {
+    const response = await apiRetaguarda.get("grupos-trabalho");
+    setGruposTrabalho(response.data);
   };
 
-  // const toggleAtivo = async (_id, value) => {
-  //   await grupoTrabalhoService.setAtivo(_id, value);
-  //   fetchData();
-  // };
+  const handleSave = async (grupoTrabalho) => {
+    try {
+      if (grupoTrabalho._id) {
+        await apiRetaguarda.patch(`grupos-trabalho/${grupoTrabalho._id}`, grupoTrabalho);
+        addMessage("info", `Grupo de trabalho ${grupoTrabalho.nome} alterado com sucesso`);
+      } else {
+        await apiRetaguarda.post("grupos-trabalho", grupoTrabalho);
+        addMessage("info", `Grupo de trabalho ${grupoTrabalho.nome} adicionado com sucesso`);
+      }
+      fetchItens();
+      return true;
+    } catch (error) {
+      const details = error.response && error.response.data ? error.response.data : error.message;
 
-  const handleEdit = (_id) => {
-    setSelectedId(_id);
-    setShowModal(true);
+      addMessage("warning", "Ocorreu um erro ao salvar o grupo de trabalho", details);
+      return false;
+    }
   };
 
-  const askForDeleteConfirmation = (_id) => {
-    setGrupoTrabalhoIdToDelete(_id);
-    setShowModal(false);
-    setShowConfirmModal(true);
-  };
-
-  const handleDelete = () => {
-    grupoTrabalhoService
-      .deleteGrupoTrabalho(grupoTrabalhoIdToDelete)
-      .then((response) => {
-        setShowModal(false);
-        setMsg(response);
-        fetchData();
-      });
-    setShowConfirmModal(false);
-  };
-
-  const handleAdd = () => {
-    setSelectedId(null);
-    setShowModal(true);
-  };
-
-  const handleSave = async () => {
-    const ret = await grupoTrabalhoEditRef.current.save();
-    setShowModal(false);
-    fetchData();
-    setMsg(ret);
-  };
-
-  const handleClose = () => {
-    setShowModal(false);
+  const handleDelete = async (id) => {
+    await apiRetaguarda.delete(`grupos-trabalho/${id}`);
+    addMessage("info", "Grupo de trabalho cancelado com sucesso");
+    fetchItens();
   };
 
   return (
-    <>
-      <div className="container">
-        {msg && (
-          <div
-            className={`alert alert-${msg.success ? "info" : "danger"}`}
-            role="alert"
-          >
-            {JSON.stringify(msg.message)}
-          </div>
-        )}
-        <div className="d-flex justify-content-between align-items-center my-1">
-          <h1>Grupo Trabalho</h1>
-          <Button
-            onClick={handleAdd}
-            className="btn btn-link mb-3 border-0 btn-no-hover btn-outline-none"
-            style={{ fontSize: "35px", backgroundColor: "transparent" }}
-          >
-            <BsPlusCircleFill />
-          </Button>
-        </div>
-        <div className="d-flex flex-wrap">
-          {gruposTrabalho.map((grupoTrabalho) => (
-            <GrupoTrabalhoCard
-              grupoTrabalho={grupoTrabalho}
-              handleEdit={handleEdit}
-            />
-          ))}
-        </div>
-      </div>
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Editar Grupo de Trabalho</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <GrupoTrabalhoEdit ref={grupoTrabalhoEditRef} _id={selectedId} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Fechar
-          </Button>
-          <Button variant="success" onClick={handleSave}>
-            Salvar
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={showConfirmModal} onHide={() => setShowConfirmModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Confirmação de Exclusão</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          Você tem certeza que deseja excluir este grupo de trabalho?
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowConfirmModal(false)}
-          >
-            Cancelar
-          </Button>
-          <Button variant="danger" onClick={handleDelete}>
-            Excluir
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+    <CrudProvider
+      title="Grupos de Trabalho"
+      saveItem={handleSave}
+      deleteItem={handleDelete}
+      fetchItens={fetchItens}
+      itens={gruposTrabalho}
+    >
+      <ListItem ComponentCard={GrupoTrabalhoCard} />
+      <EditModal ComponentEdit={GrupoTrabalhoEdit} />
+    </CrudProvider>
   );
 };
 

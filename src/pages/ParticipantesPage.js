@@ -21,7 +21,7 @@ const ParticipantesPage = () => {
     setParticipantes(response.data);
   };
 
-  const handleSave = async (participante) => {
+  const handleSave = async (participante) => { 
     try {
       if (participante._id) {
         await apiRetaguarda.patch(`participantes/${participante._id}`, participante);
