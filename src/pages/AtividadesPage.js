@@ -10,7 +10,7 @@ import {
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import atividadeService from "../services/atividadeService";
-import AtividadeEdit from "../components/AtividadeEdit";
+import AtividadeEdit from "../components/atividade/AtividadeEdit";
 import participanteService from "../services/participanteService";
 import grupoTrabalhoService from "../services/grupoTrabalhoService";
 import projetoService from "../services/projetoService";
