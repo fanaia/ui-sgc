@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apiRetaguarda = axios.create({
-  // baseURL: "http://192.168.1.10:3010/api",
-  baseURL: "http://127.0.0.1:3010/api",
+  baseURL: "http://192.168.18.13:3010/api",
+  // baseURL: "http://127.0.0.1:3010/api",
 });
 
 apiRetaguarda.interceptors.request.use((config) => {

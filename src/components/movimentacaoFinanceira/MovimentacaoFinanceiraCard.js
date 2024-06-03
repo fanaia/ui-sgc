@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 
-const AtividadeCard = ({ item }) => {
+const MovimentacaoFinanceiraCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
 
   const statusColors = {
     ativo: "green",
     pendente: "yellow",
-    cancelado: "red",
     recusado: "red",
+    cancelado: "red",
   };
 
   const cardOpacity =
@@ -33,25 +33,37 @@ const AtividadeCard = ({ item }) => {
       }}
       onClick={handleSelect}
     >
-      <Card.Header>
-        <strong>{item?.descricao}</strong>
+      <Card.Header style={{ backgroundColor: "#ffffff", fontWeight: "bold" }}>
+        {item?.descricao}
       </Card.Header>
       <Card.Body style={{ fontSize: "calc(1em - 3px)", fontStyle: "italic" }}>
         <Card.Text>
-          <strong>Descrição: </strong>
-          <strong>{item?.descricao ? item.descricao : "Carregando..."}</strong>
-        </Card.Text>
-        <Card.Text>
-          <strong>Grupo de Trabalho: </strong>
-          {item?.grupoTrabalho ? item.grupoTrabalho.nome : "Carregando..."}
-        </Card.Text>
-        <Card.Text>
-          <strong>Projeto: </strong>
-          {item?.projeto ? item.projeto.nome : "Carregando..."}
-        </Card.Text>
-        <Card.Text>
           <strong>Participante: </strong>
           {item?.participante ? item.participante.nome : "Carregando..."}
+        </Card.Text>
+        <Card.Text>
+          <strong>Valor: </strong>
+          {item?.valor}
+        </Card.Text>
+        <Card.Text>
+          <strong>Tipo de Movimentação: </strong>
+          {item?.tipoMovimentacao}
+        </Card.Text>
+        <Card.Text>
+          <strong>Chave Pix Transação: </strong>
+          {item?.chavePixTransacao}
+        </Card.Text>
+        <Card.Text>
+          <strong>Origem: </strong>
+          {item?.origem}
+        </Card.Text>
+        <Card.Text>
+          <strong>Destino: </strong>
+          {item?.destino}
+        </Card.Text>
+        <Card.Text>
+          <strong>Data da Transação: </strong>
+          {item?.dataTransação}
         </Card.Text>
         <Card.Text>
           <strong>Status: </strong>
@@ -88,4 +100,4 @@ const AtividadeCard = ({ item }) => {
   );
 };
 
-export default AtividadeCard;
+export default MovimentacaoFinanceiraCard;
