@@ -1,26 +1,27 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button, ButtonGroup } from "react-bootstrap";
-import CrudContext from "../contexts/CrudContext";
+import CrudContext from "../../contexts/CrudContext";
+import MessageDisplay from "../common/MessageDisplay";
 
 const EditModal = ({ ComponentEdit }) => {
   const { title, selectedItem, showModal, setShowModal, saveItem, deleteItem } =
     useContext(CrudContext);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
-  const handleSave = () => {
-    saveItem(selectedItem);
-    setShowModal(false);
-  };
-
-  const askForDeleteConfirmation = () => {
-    setShowModal(false);
-    setShowConfirmModal(true);
+  const handleSave = async () => {
+    const ret = await saveItem(selectedItem);
+    setShowModal(!ret);
   };
 
   const handleDelete = () => {
     deleteItem(selectedItem._id);
     setShowModal(false);
     setShowConfirmModal(false);
+  };
+
+  const askForDeleteConfirmation = () => {
+    setShowModal(false);
+    setShowConfirmModal(true);
   };
 
   const handleClose = () => {
@@ -36,6 +37,7 @@ const EditModal = ({ ComponentEdit }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: "calc(100vh - 210px)", overflowY: "auto" }}>
+          <MessageDisplay />
           <ComponentEdit />
         </Modal.Body>
         <Modal.Footer>

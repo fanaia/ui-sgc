@@ -6,10 +6,10 @@ import React, {
 } from "react";
 import { jwtDecode } from "jwt-decode";
 import { format } from "date-fns";
-import projetoService from "../services/projetoService";
-import atividadeService from "../services/atividadeService";
+import projetoService from "../../services/projetoService";
+import atividadeService from "../../services/atividadeService";
 import { Card, Form } from "react-bootstrap";
-import grupoTrabalhoService from "../services/grupoTrabalhoService";
+import grupoTrabalhoService from "../../services/grupoTrabalhoService";
 
 const AtividadeEdit = forwardRef(({ _id }, ref) => {
   const [step, setStep] = useState(_id ? 3 : 1);

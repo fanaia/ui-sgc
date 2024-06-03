@@ -1,7 +1,7 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/common/Header";
 import LoginPage from "./pages/LoginPage";
 import ProjetosPage from "./pages/ProjetosPage";
 import ConsensoPage from "./pages/ConsensoPage";
@@ -12,9 +12,9 @@ import AtividadesPage from "./pages/AtividadesPage";
 import GruposTrabalhoPage from "./pages/GruposTrabalhoPage";
 import HomePage from "./pages/HomePage";
 import { MessageProvider } from "./contexts/MessageContext"; // Import the provider
-import MessageDisplay from "./components/MessageDisplay";
+import MessageDisplay from "./components/common/MessageDisplay";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
 
 const App = () => {
   return (

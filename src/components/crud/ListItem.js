@@ -1,7 +1,7 @@
 // ListCard.js
 import React, { useContext } from "react";
-import CrudContext from "../contexts/CrudContext";
-import { Button } from "react-bootstrap";
+import CrudContext from "../../contexts/CrudContext";
+import { Button, Container } from "react-bootstrap";
 import { BsPlusCircleFill } from "react-icons/bs";
 
 const ListItem = ({ ComponentCard }) => {
@@ -13,7 +13,7 @@ const ListItem = ({ ComponentCard }) => {
   };
 
   return (
-    <>
+    <Container>
       <div className="d-flex justify-content-between align-items-center my-1">
         <h1 style={{ marginLeft: "10px" }}>{title}</h1>
         <Button
@@ -24,10 +24,10 @@ const ListItem = ({ ComponentCard }) => {
           <BsPlusCircleFill />
         </Button>
       </div>
-      {itens.map((item) => (
-        <ComponentCard key={item._id} item={item} />
+      {itens.map((item, index) => (
+        <ComponentCard key={index} item={item} />
       ))}
-    </>
+    </Container>
   );
 };
 

@@ -1,12 +1,12 @@
 // ParticipantesPage.js
 import React, { useState, useEffect, useContext } from "react";
+import MessageContext from "../contexts/MessageContext";
 import { CrudProvider } from "../contexts/CrudContext";
 import apiRetaguarda from "../config/apiRetaguarda";
-import ListItem from "../components/ListItem";
-import EditModal from "../components/EditModal";
+import ListItem from "../components/crud/ListItem";
+import EditModal from "../components/crud/EditModal";
 import ParticipanteCard from "../components/participante/ParticipanteCard";
 import ParticipanteEdit from "../components/participante/ParticipanteEdit";
-import MessageContext from "../contexts/MessageContext";
 
 const ParticipantesPage = () => {
   const { addMessage } = useContext(MessageContext);
@@ -22,14 +22,22 @@ const ParticipantesPage = () => {
   };
 
   const handleSave = async (participante) => {
-    if (participante._id) {
-      await apiRetaguarda.patch(`participantes/${participante._id}`, participante);
-      addMessage("info", "Participante alterado com sucesso");
-    } else {
-      await apiRetaguarda.post("participantes", participante);
-      addMessage("info", "Participante adicionado com sucesso");
+    try {
+      if (participante._id) {
+        await apiRetaguarda.patch(`participantes/${participante._id}`, participante);
+        addMessage("info", `Participante  ${participante.nome} alterado com sucesso`);
+      } else {
+        await apiRetaguarda.post("participantes", participante);
+        addMessage("info", `Participante ${participante.nome} adicionado com sucesso`);
+      }
+      fetchItens();
+      return true;
+    } catch (error) {
+      const details = error.response && error.response.data ? error.response.data : error.message;
+
+      addMessage("warning", "Ocorreu um erro ao salvar o participante", details);
+      return false;
     }
-    fetchItens();
   };
 
   const handleDelete = async (id) => {
