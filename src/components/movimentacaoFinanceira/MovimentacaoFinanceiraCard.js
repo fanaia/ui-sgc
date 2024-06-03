@@ -29,6 +29,7 @@ const MovimentacaoFinanceiraCard = ({ item }) => {
         cursor: "pointer",
         opacity: cardOpacity,
         borderBottom: `10px solid ${statusColors[item?.status] || "grey"}`,
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
       }}
       onClick={handleSelect}
     >

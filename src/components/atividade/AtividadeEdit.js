@@ -65,16 +65,6 @@ const AtividadeEdit = () => {
         </Form.Select>
       </Form.Group>
       <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Cor da Etiqueta</Form.Label>
-        <FormControl
-          type="color"
-          value={atividade?.corEtiqueta}
-          onChange={(e) =>
-            setAtividade({ ...atividade, corEtiqueta: e.target.value })
-          }
-        />
-      </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
         <Form.Label style={{ marginBottom: "2px" }}>Descrição</Form.Label>
         <FormControl
           type="text"

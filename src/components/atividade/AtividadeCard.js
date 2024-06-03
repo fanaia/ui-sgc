@@ -28,13 +28,19 @@ const AtividadeCard = ({ item }) => {
         margin: "10px auto",
         cursor: "pointer",
         opacity: cardOpacity,
+        borderBottom: `10px solid ${statusColors[item?.status] || "grey"}`,
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
       }}
       onClick={handleSelect}
     >
-      <Card.Header style={{ backgroundColor: "#ffffff", fontWeight: "bold" }}>
-        {item?.descricao}
+      <Card.Header>
+        <strong>{item?.descricao}</strong>
       </Card.Header>
       <Card.Body style={{ fontSize: "calc(1em - 3px)", fontStyle: "italic" }}>
+        <Card.Text>
+          <strong>Descrição: </strong>
+          <strong>{item?.descricao ? item.descricao : "Carregando..."}</strong>
+        </Card.Text>
         <Card.Text>
           <strong>Grupo de Trabalho: </strong>
           {item?.grupoTrabalho ? item.grupoTrabalho.nome : "Carregando..."}
@@ -54,11 +60,30 @@ const AtividadeCard = ({ item }) => {
       </Card.Body>
       <Card.Footer
         style={{
-          height: "8px",
-          padding: "0",
-          backgroundColor: statusColors[item?.status] || "grey",
+          padding: "5px",
         }}
-      />
+      >
+        <label
+          style={{
+            backgroundColor: item?.grupoTrabalho?.corEtiqueta,
+            fontSize: "0.8em",
+            padding: "5px",
+            margin: "5px",
+          }}
+        >
+          {item?.grupoTrabalho?.nome}
+        </label>
+        <label
+          style={{
+            backgroundColor: item?.projeto?.corEtiqueta,
+            fontSize: "0.8em",
+            padding: "5px",
+            margin: "5px",
+          }}
+        >
+          {item?.projeto?.nome}
+        </label>
+      </Card.Footer>
     </Card>
   );
 };
