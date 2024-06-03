@@ -23,6 +23,7 @@ const ParticipanteCard = ({ participante, handleEdit }) => {
           participante.status === "recusado"
             ? 0.7
             : 1,
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
       }}
       onClick={() => handleEdit(participante._id)}
     >
