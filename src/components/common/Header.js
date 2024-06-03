@@ -6,7 +6,7 @@ const Header = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <header style={{ marginBottom: '10px' }}>
+    <header style={{ marginBottom: "10px" }}>
       <Navbar
         bg="dark"
         variant="dark"
@@ -23,27 +23,65 @@ const Header = () => {
           CS pix-conta
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav" style={{ paddingLeft: "1rem" }}>
+        <Navbar.Collapse
+          id="responsive-navbar-nav"
+          style={{ paddingLeft: "1rem" }}
+        >
           <Nav>
-            <Nav.Link as={Link} to="/auth/carteira" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as={Link}
+              to="/auth/carteira"
+              onClick={() => setExpanded(false)}
+            >
               Carteira
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth/consenso" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as={Link}
+              to="/auth/consenso"
+              onClick={() => setExpanded(false)}
+            >
               Consenso
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth/atividades" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as={Link}
+              to="/auth/atividades"
+              onClick={() => setExpanded(false)}
+            >
               Atividades
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth/financeiro" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as={Link}
+              to="/auth/movimentacoes-financeiras"
+              onClick={() => setExpanded(false)}
+            >
+              Movimentações Financeiras
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to="/auth/financeiro"
+              onClick={() => setExpanded(false)}
+            >
               Financeiro
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth/projetos" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as={Link}
+              to="/auth/projetos"
+              onClick={() => setExpanded(false)}
+            >
               Projetos
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth/grupos-trabalho" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as={Link}
+              to="/auth/grupos-trabalho"
+              onClick={() => setExpanded(false)}
+            >
               Grupos de Trabalho
             </Nav.Link>
-            <Nav.Link as={Link} to="/auth/participantes" onClick={() => setExpanded(false)}>
+            <Nav.Link
+              as={Link}
+              to="/auth/participantes"
+              onClick={() => setExpanded(false)}
+            >
               Participantes
             </Nav.Link>
             <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
