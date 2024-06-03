@@ -2,6 +2,10 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 const GrupoTrabalhoCard = ({ grupoTrabalho, handleEdit }) => {
+  const cardOpacity = ["cancelado", "recusado"].includes(grupoTrabalho.status)
+    ? 0.7
+    : 1;
+
   return (
     <Card
       key={grupoTrabalho._id}
@@ -10,6 +14,8 @@ const GrupoTrabalhoCard = ({ grupoTrabalho, handleEdit }) => {
         margin: "10px",
         borderLeft: `10px solid ${grupoTrabalho.corEtiqueta}`,
         cursor: "pointer",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+        opacity: cardOpacity,
       }}
       onClick={() => handleEdit(grupoTrabalho._id)}
     >
