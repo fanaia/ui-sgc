@@ -54,7 +54,7 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
         <FormControl
           className="w-100"
           type="color"
-          value={grupoTrabalho?.corEtiqueta}
+          value={grupoTrabalho?.corEtiqueta || "#ffffff"} // Define a cor inicial como branco
           onChange={(e) =>
             setGrupoTrabalho({
               ...grupoTrabalho,
@@ -86,7 +86,9 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
         <Form.Select
           id="status"
           value={grupoTrabalho?.status}
-          onChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, status: e.target.value })}
+          onChange={(e) =>
+            setGrupoTrabalho({ ...grupoTrabalho, status: e.target.value })
+          }
         >
           <option value="pendente">Pendente</option>
           <option value="ativo">Ativo</option>

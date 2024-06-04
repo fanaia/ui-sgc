@@ -27,7 +27,9 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
         <div className="col">
           <Form>
             <Form.Group style={{ marginBottom: "5px" }}>
-              <Form.Label style={{ marginBottom: "2px" }}>Nome do Projeto</Form.Label>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Nome do Projeto
+              </Form.Label>
               <FormControl
                 type="text"
                 value={projeto?.nome}
@@ -44,20 +46,28 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
               <FormControl
                 type="text"
                 value={projeto?.descricao}
-                onChange={(e) => setProjeto({ ...projeto, descricao: e.target.value })}
+                onChange={(e) =>
+                  setProjeto({ ...projeto, descricao: e.target.value })
+                }
               />
             </Form.Group>
             <Form.Group style={{ marginBottom: "5px" }}>
-              <Form.Label style={{ marginBottom: "2px" }}>Cor da Etiqueta</Form.Label>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Cor da Etiqueta
+              </Form.Label>
               <FormControl
                 className="w-100"
                 type="color"
-                value={projeto?.corEtiqueta}
-                onChange={(e) => setProjeto({ ...projeto, corEtiqueta: e.target.value })}
+                value={projeto?.corEtiqueta || "#ffffff"} // Define a cor inicial como branco
+                onChange={(e) =>
+                  setProjeto({ ...projeto, corEtiqueta: e.target.value })
+                }
               />
             </Form.Group>
             <Form.Group style={{ marginBottom: "5px" }}>
-              <Form.Label style={{ marginBottom: "2px" }}>Responsável</Form.Label>
+              <Form.Label style={{ marginBottom: "2px" }}>
+                Responsável
+              </Form.Label>
               <Form.Select
                 value={projeto?.participanteResponsavel?._id}
                 onChange={(e) =>
@@ -80,7 +90,9 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
               <Form.Select
                 id="status"
                 value={projeto?.status}
-                onChange={(e) => setProjeto({ ...projeto, status: e.target.value })}
+                onChange={(e) =>
+                  setProjeto({ ...projeto, status: e.target.value })
+                }
               >
                 <option value="pendente">Pendente</option>
                 <option value="ativo">Ativo</option>
