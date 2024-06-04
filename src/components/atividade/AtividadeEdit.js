@@ -32,9 +32,17 @@ const AtividadeEdit = () => {
   return (
     <Form>
       <Form.Group>
+        <Form.Label>Descrição</Form.Label>
+        <FormControl
+          as="textarea"
+          value={atividade?.descricao}
+          onChange={(e) => setAtividade({ ...atividade, descricao: e.target.value })}
+        />
+      </Form.Group>
+      <Form.Group>
         <Form.Label>Grupo de Trabalho</Form.Label>
         <Form.Select
-          value={atividade?.grupoTrabalho}
+          value={atividade?.grupoTrabalho._id}
           onChange={(e) => setAtividade({ ...atividade, grupoTrabalho: e.target.value })}
         >
           <option></option>
@@ -48,7 +56,7 @@ const AtividadeEdit = () => {
       <Form.Group>
         <Form.Label>Projeto</Form.Label>
         <Form.Select
-          value={atividade?.projeto}
+          value={atividade?.projeto._id}
           onChange={(e) => setAtividade({ ...atividade, projeto: e.target.value })}
         >
           <option></option>
@@ -59,15 +67,6 @@ const AtividadeEdit = () => {
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Descrição</Form.Label>
-        <FormControl
-          type="text"
-          value={atividade?.descricao}
-          onChange={(e) => setAtividade({ ...atividade, descricao: e.target.value })}
-        />
-      </Form.Group>
-
       <Form.Group>
         <Form.Label>Data de Realização</Form.Label>
         <FormControl

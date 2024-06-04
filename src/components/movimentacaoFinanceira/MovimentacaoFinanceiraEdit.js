@@ -54,7 +54,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Participante</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.participante}
+          value={movimentacaoFinanceira?.participante._id}
           onChange={(e) =>
             setMovimentacaoFinanceira({
               ...movimentacaoFinanceira,
@@ -73,7 +73,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Grupo de Trabalho</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.grupoTrabalho}
+          value={movimentacaoFinanceira?.grupoTrabalho._id}
           onChange={(e) =>
             setMovimentacaoFinanceira({
               ...movimentacaoFinanceira,
@@ -92,7 +92,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Projeto</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.projeto}
+          value={movimentacaoFinanceira?.projeto._id}
           onChange={(e) =>
             setMovimentacaoFinanceira({ ...movimentacaoFinanceira, projeto: e.target.value })
           }

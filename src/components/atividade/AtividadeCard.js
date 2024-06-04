@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import StyledCard from "../common/StyledCard";
+import Etiqueta from "../common/Etiqueta";
 
 const AtividadeCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
@@ -28,6 +29,13 @@ const AtividadeCard = ({ item }) => {
           {item?.status}
         </Card.Text>
       </Card.Body>
+      <Card.Footer>
+        <Etiqueta
+          label={item?.grupoTrabalho?.nome}
+          corEtiqueta={item?.grupoTrabalho?.corEtiqueta}
+        />
+        <Etiqueta label={item?.projeto?.nome} corEtiqueta={item?.projeto?.corEtiqueta} />
+      </Card.Footer>
     </StyledCard>
   );
 };

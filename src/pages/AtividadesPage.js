@@ -25,12 +25,12 @@ const AtividadesPage = () => {
     try {
       if (atividade._id) {
         await apiRetaguarda.patch(`atividades/${atividade._id}`, atividade);
-        addMessage("info", `Atividade ${atividade.nome} alterada com sucesso`);
+        addMessage("info", `Atividade ${atividade.descricao} alterada com sucesso`);
       } else {
         await apiRetaguarda.post("atividades", atividade);
         addMessage(
           "info",
-          `Atividade ${atividade.nome} adicionada com sucesso`
+          `Atividade ${atividade.descricao} adicionada com sucesso`
         );
       }
       fetchItens();
