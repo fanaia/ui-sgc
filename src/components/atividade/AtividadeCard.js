@@ -38,20 +38,20 @@ const AtividadeCard = ({ item }) => {
       </Card.Header>
       <Card.Body style={{ fontSize: "calc(1em - 3px)", fontStyle: "italic" }}>
         <Card.Text>
-          <strong>Descrição: </strong>
-          <strong>{item?.descricao ? item.descricao : "Carregando..."}</strong>
-        </Card.Text>
-        <Card.Text>
-          <strong>Grupo de Trabalho: </strong>
-          {item?.grupoTrabalho ? item.grupoTrabalho.nome : "Carregando..."}
-        </Card.Text>
-        <Card.Text>
-          <strong>Projeto: </strong>
-          {item?.projeto ? item.projeto.nome : "Carregando..."}
-        </Card.Text>
-        <Card.Text>
           <strong>Participante: </strong>
           {item?.participante ? item.participante.nome : "Carregando..."}
+        </Card.Text>
+        <Card.Text>
+          <strong>Total de Horas: </strong>
+          {item?.totalHoras}h
+        </Card.Text>
+        <Card.Text>
+          <strong>Total de Tokens: </strong>
+          {item?.totalTokens}
+        </Card.Text>
+        <Card.Text>
+          <strong>Data de Realização: </strong>
+          {item?.dataRealizacao}
         </Card.Text>
         <Card.Text>
           <strong>Status: </strong>
