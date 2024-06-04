@@ -5,13 +5,13 @@ body,
   margin: 0;
   padding: 0;
   background-color: black;
-  color: #a5a5a5; /* cinza claro */
+  color: #ddd; /* cinza claro */
 }
 
 .card,
 .modal-content {
   background-color: #333;
-  color: #a5a5a5; /* cinza claro */
+  color: #ddd; /* cinza claro */
 }
 
 .card-header,
@@ -20,13 +20,13 @@ body,
   font-weight: bold;
   border-bottom: 1px solid #444;
   background-color: #444;
-  color: #a5a5a5; /* cinza claro */
+  color: #ddd; /* cinza claro */
 }
 
 .card-body,
 .modal-body {
   background-color: #333;
-  color: #a5a5a5; /* cinza claro */
+  color: #ddd; /* cinza claro */
 }
 
 .form-label {

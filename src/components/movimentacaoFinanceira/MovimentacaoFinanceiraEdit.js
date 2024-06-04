@@ -41,7 +41,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Descrição</Form.Label>
         <FormControl
-          type="text"
+          as="textarea"
           value={movimentacaoFinanceira?.descricao}
           onChange={(e) =>
             setMovimentacaoFinanceira({
@@ -54,7 +54,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Participante</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.participante._id}
+          value={movimentacaoFinanceira?.participante?._id}
           onChange={(e) =>
             setMovimentacaoFinanceira({
               ...movimentacaoFinanceira,
@@ -73,7 +73,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Grupo de Trabalho</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.grupoTrabalho._id}
+          value={movimentacaoFinanceira?.grupoTrabalho?._id}
           onChange={(e) =>
             setMovimentacaoFinanceira({
               ...movimentacaoFinanceira,
@@ -92,7 +92,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Projeto</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.projeto._id}
+          value={movimentacaoFinanceira?.projeto?._id}
           onChange={(e) =>
             setMovimentacaoFinanceira({ ...movimentacaoFinanceira, projeto: e.target.value })
           }
@@ -132,11 +132,11 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
         <Form.Label>Chave Pix Transação</Form.Label>
         <FormControl
           type="text"
-          value={movimentacaoFinanceira?.chavepixtransacao}
+          value={movimentacaoFinanceira?.chavePixTransacao}
           onChange={(e) =>
             setMovimentacaoFinanceira({
               ...movimentacaoFinanceira,
-              chavepixtransacao: e.target.value,
+              chavePixTransacao: e.target.value,
             })
           }
         />

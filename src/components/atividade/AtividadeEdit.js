@@ -42,7 +42,7 @@ const AtividadeEdit = () => {
       <Form.Group>
         <Form.Label>Grupo de Trabalho</Form.Label>
         <Form.Select
-          value={atividade?.grupoTrabalho._id}
+          value={atividade?.grupoTrabalho?._id}
           onChange={(e) => setAtividade({ ...atividade, grupoTrabalho: e.target.value })}
         >
           <option></option>
@@ -56,7 +56,7 @@ const AtividadeEdit = () => {
       <Form.Group>
         <Form.Label>Projeto</Form.Label>
         <Form.Select
-          value={atividade?.projeto._id}
+          value={atividade?.projeto?._id}
           onChange={(e) => setAtividade({ ...atividade, projeto: e.target.value })}
         >
           <option></option>
