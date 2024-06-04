@@ -8,9 +8,9 @@ import CardSaldoTokensTotal from "../components/cardsIndicadores/CardSaldoTokens
 function HomePage() {
   return (
     <Container>
-      <CardSaldoTokensParticipante />
-      <hr />
       <CardCotacaoToken />
+      <hr />
+      <CardSaldoTokensParticipante />
       <hr />
       <CardSaldoTotal />
       <CardSaldoTokensTotal />
