@@ -11,13 +11,21 @@ const ParticipanteCard = ({ item }) => {
     setShowModal(true);
   };
 
+  const tokenHoraMap = {
+    0.2: "Aprendiz - 0,2 token",
+    0.4: "Iniciante - 0,4 token",
+    0.6: "Experiente - 0,6 token",
+    0.8: "Especialista - 0,8 token",
+    1: "Responsável - 1 token",
+  };
+
   return (
     <StyledCard item={item} onClick={handleSelect}>
       <Card.Header>{item?.nome}</Card.Header>
       <Card.Body>
         <Card.Text>
           <strong>Valor hora: </strong>
-          {item?.tokenHora}
+          {tokenHoraMap[item?.tokenHora]}
         </Card.Text>
         <Card.Text>
           <strong>Status: </strong>
