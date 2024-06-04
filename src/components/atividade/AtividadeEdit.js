@@ -7,6 +7,7 @@ import StatusSelect from "../common/StatusSelect";
 const AtividadeEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
   const [atividade, setAtividade] = useState(selectedItem);
+  const [participantes, setParticipantes] = useState([]);
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [projetos, setProjetos] = useState([]);
   const [step, setStep] = useState(selectedItem ? 3 : 1);
@@ -16,6 +17,11 @@ const AtividadeEdit = () => {
   }, [atividade, setSelectedItem]);
 
   useEffect(() => {
+    const fetchParticipantes = async () => {
+      const response = await apiRetaguarda.get("participantes");
+      setParticipantes(response.data);
+    };
+
     const fetchGruposTrabalho = async () => {
       const response = await apiRetaguarda.get("grupos-trabalho");
       setGruposTrabalho(response.data);
@@ -26,6 +32,7 @@ const AtividadeEdit = () => {
       setProjetos(response.data);
     };
 
+    fetchParticipantes();
     fetchGruposTrabalho();
     fetchProjetos();
   }, []);
@@ -78,6 +85,25 @@ const AtividadeEdit = () => {
               value={atividade?.descricao}
               onChange={(e) => setAtividade({ ...atividade, descricao: e.target.value })}
             />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Participante</Form.Label>
+            <Form.Select
+              value={atividade?.participante?._id}
+              onChange={(e) =>
+                setAtividade({
+                  ...atividade,
+                  participante: e.target.value,
+                })
+              }
+            >
+              <option></option>
+              {participantes.map((participante) => (
+                <option key={participante._id} value={participante._id}>
+                  {participante.nome}
+                </option>
+              ))}
+            </Form.Select>
           </Form.Group>
           <Form.Group>
             <Form.Label>Grupo de Trabalho</Form.Label>
