@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import Etiqueta from "../common/Etiqueta";
 import StyledCard from "../common/StyledCard";
+import { dataExibicao } from "../../utils/formatDate";
 
 const MovimentacaoFinanceiraCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
@@ -42,7 +43,7 @@ const MovimentacaoFinanceiraCard = ({ item }) => {
         </Card.Text>
         <Card.Text>
           <strong>Data da Transação: </strong>
-          {item?.dataTransacao}
+          {dataExibicao(item?.dataTransacao)}
         </Card.Text>
         <Card.Text>
           <strong>Status: </strong>
