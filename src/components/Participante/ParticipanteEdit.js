@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
+import StatusSelect from "../common/StatusSelect";
 
 const ParticipanteEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
@@ -70,19 +71,12 @@ const ParticipanteEdit = () => {
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Status:</Form.Label>
-        <Form.Select
-          id="status"
-          value={participante?.status}
-          onChange={(e) => setParticipante({ ...participante, status: e.target.value })}
-        >
-          <option value="pendente">Pendente</option>
-          <option value="ativo">Ativo</option>
-          <option value="recusado">Recusado</option>
-          <option value="cancelado">Cancelado</option>
-        </Form.Select>
-      </Form.Group>
+      <StatusSelect
+        status={participante?.status}
+        handleStatusChange={(e) =>
+          setParticipante({ ...participante, status: e.target.value })
+        }
+      />
     </Form>
   );
 };

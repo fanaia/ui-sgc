@@ -2,11 +2,11 @@ import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
+import StatusSelect from "../common/StatusSelect";
 
 const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
-  const [movimentacaoFinanceira, setMovimentacaoFinanceira] =
-    useState(selectedItem);
+  const [movimentacaoFinanceira, setMovimentacaoFinanceira] = useState(selectedItem);
   const [participantes, setParticipantes] = useState([]);
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [projetos, setProjetos] = useState([]);
@@ -38,8 +38,8 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
 
   return (
     <Form>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Descrição</Form.Label>
+      <Form.Group>
+        <Form.Label>Descrição</Form.Label>
         <FormControl
           type="text"
           value={movimentacaoFinanceira?.descricao}
@@ -51,8 +51,8 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Participante</Form.Label>
+      <Form.Group>
+        <Form.Label>Participante</Form.Label>
         <Form.Select
           value={movimentacaoFinanceira?.participante}
           onChange={(e) =>
@@ -70,10 +70,8 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>
-          Grupo de Trabalho
-        </Form.Label>
+      <Form.Group>
+        <Form.Label>Grupo de Trabalho</Form.Label>
         <Form.Select
           value={movimentacaoFinanceira?.grupoTrabalho}
           onChange={(e) =>
@@ -91,15 +89,12 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Projeto</Form.Label>
+      <Form.Group>
+        <Form.Label>Projeto</Form.Label>
         <Form.Select
           value={movimentacaoFinanceira?.projeto}
           onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              projeto: e.target.value,
-            })
+            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, projeto: e.target.value })
           }
         >
           <option></option>
@@ -110,23 +105,18 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Valor</Form.Label>
+      <Form.Group>
+        <Form.Label>Valor</Form.Label>
         <FormControl
           type="number"
           value={movimentacaoFinanceira?.valor}
           onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              valor: e.target.value,
-            })
+            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, valor: e.target.value })
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>
-          Tipo de Movimentação
-        </Form.Label>
+      <Form.Group>
+        <Form.Label>Tipo de Movimentação</Form.Label>
         <FormControl
           type="number"
           value={movimentacaoFinanceira?.tipoMovimentacao}
@@ -138,10 +128,8 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>
-          Chave Pix Transação
-        </Form.Label>
+      <Form.Group>
+        <Form.Label>Chave Pix Transação</Form.Label>
         <FormControl
           type="text"
           value={movimentacaoFinanceira?.chavepixtransacao}
@@ -153,66 +141,42 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Origem</Form.Label>
+      <Form.Group>
+        <Form.Label>Origem</Form.Label>
         <FormControl
           type="text"
           value={movimentacaoFinanceira?.origem}
           onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              origem: e.target.value,
-            })
+            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, origem: e.target.value })
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Destino</Form.Label>
+      <Form.Group>
+        <Form.Label className="mb-1">Destino</Form.Label>
         <FormControl
           type="text"
           value={movimentacaoFinanceira?.destino}
           onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              destino: e.target.value,
-            })
+            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, destino: e.target.value })
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>
-          Data da Transação
-        </Form.Label>
+      <Form.Group>
+        <Form.Label>Data da Transação</Form.Label>
         <FormControl
           type="date"
           value={movimentacaoFinanceira?.dataTransação}
           onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              dataTransação: e.target.value,
-            })
+            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, dataTransação: e.target.value })
           }
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Status</Form.Label>
-        <Form.Select
-          id="status"
-          value={movimentacaoFinanceira?.status}
-          onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              status: e.target.value,
-            })
-          }
-        >
-          <option></option>
-          <option value="ativo">Ativo</option>
-          <option value="pendente">Pendente</option>
-          <option value="recusado">Recusado</option>
-          <option value="cancelado">Cancelado</option>
-        </Form.Select>
-      </Form.Group>
+      <StatusSelect
+        status={movimentacaoFinanceira?.status}
+        handleStatusChange={(e) =>
+          setMovimentacaoFinanceira({ ...movimentacaoFinanceira, status: e.target.value })
+        }
+      />
     </Form>
   );
 });

@@ -1,35 +1,45 @@
 html,
 body,
-#root,
-.App {
+#root {
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background-color: white;
-  color: black;
-  padding: 10px;
-}
-
-.App h1 {
-  text-align: center;
-}
-
-.App h2 {
-  text-align: center;
-  font-size: 1.3em; /* Ajuste este valor conforme necessário */
-}
-
-.App .theme-toggle {
-  margin-top: auto;
-}
-
-.dark-theme {
   background-color: black;
-  color: white;
+  color: #a5a5a5; /* cinza claro */
+}
+
+.card,
+.modal-content {
+  background-color: #333;
+  color: #a5a5a5; /* cinza claro */
+}
+
+.card-header,
+.modal-header,
+.modal-footer {
+  font-weight: bold;
+  border-bottom: 1px solid #444;
+  background-color: #444;
+  color: #a5a5a5; /* cinza claro */
+}
+
+.card-body,
+.modal-body {
+  background-color: #333;
+  color: #a5a5a5; /* cinza claro */
+}
+
+.form-label {
+  margin-top: 0.5rem;
+  margin-bottom: 0.125rem;
+}
+
+.card-text {
+  margin-bottom: 0.5rem;
+}
+
+.etiqueta {
+  color: #000;
+  padding: 0 0.5rem  0 0.5rem;
+  margin: 0 0.5rem 0 0;
 }

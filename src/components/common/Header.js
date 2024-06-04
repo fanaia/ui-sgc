@@ -28,20 +28,20 @@ const Header = () => {
           style={{ paddingLeft: "1rem" }}
         >
           <Nav>
-            <Nav.Link
+            {/* <Nav.Link
               as={Link}
               to="/auth/carteira"
               onClick={() => setExpanded(false)}
             >
               Carteira
-            </Nav.Link>
-            <Nav.Link
+            </Nav.Link> */}
+            {/* <Nav.Link
               as={Link}
               to="/auth/consenso"
               onClick={() => setExpanded(false)}
             >
               Consenso
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link
               as={Link}
               to="/auth/atividades"
@@ -56,13 +56,13 @@ const Header = () => {
             >
               Movimentações Financeiras
             </Nav.Link>
-            <Nav.Link
+            {/* <Nav.Link
               as={Link}
               to="/auth/financeiro"
               onClick={() => setExpanded(false)}
             >
               Financeiro
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link
               as={Link}
               to="/auth/projetos"

@@ -23,55 +23,37 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
 
   return (
     <Form>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Nome</Form.Label>
+      <Form.Group>
+        <Form.Label>Nome</Form.Label>
         <FormControl
           type="text"
           value={grupoTrabalho?.nome}
-          onChange={(e) =>
-            setGrupoTrabalho({
-              ...grupoTrabalho,
-              nome: e.target.value,
-            })
-          }
+          onChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, nome: e.target.value })}
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Descrição</Form.Label>
+      <Form.Group>
+        <Form.Label>Descrição</Form.Label>
         <FormControl
           type="text"
           value={grupoTrabalho?.descricao}
-          onChange={(e) =>
-            setGrupoTrabalho({
-              ...grupoTrabalho,
-              descricao: e.target.value,
-            })
-          }
+          onChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, descricao: e.target.value })}
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Cor da Etiqueta</Form.Label>
+      <Form.Group>
+        <Form.Label>Cor da Etiqueta</Form.Label>
         <FormControl
           className="w-100"
           type="color"
           value={grupoTrabalho?.corEtiqueta || "#ffffff"}
-          onChange={(e) =>
-            setGrupoTrabalho({
-              ...grupoTrabalho,
-              corEtiqueta: e.target.value,
-            })
-          }
+          onChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, corEtiqueta: e.target.value })}
         />
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Responsável</Form.Label>
+      <Form.Group>
+        <Form.Label>Responsável</Form.Label>
         <Form.Select
           value={grupoTrabalho?.participanteResponsavel?._id}
           onChange={(e) =>
-            setGrupoTrabalho({
-              ...grupoTrabalho,
-              participanteResponsavel: e.target.value,
-            })
+            setGrupoTrabalho({ ...grupoTrabalho, participanteResponsavel: e.target.value })
           }
         >
           {participantes.map((participante) => (
@@ -81,14 +63,12 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group style={{ marginBottom: "5px" }}>
-        <Form.Label style={{ marginBottom: "2px" }}>Status</Form.Label>
+      <Form.Group>
+        <Form.Label>Status</Form.Label>
         <Form.Select
           id="status"
           value={grupoTrabalho?.status}
-          onChange={(e) =>
-            setGrupoTrabalho({ ...grupoTrabalho, status: e.target.value })
-          }
+          onChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, status: e.target.value })}
         >
           <option value="pendente">Pendente</option>
           <option value="ativo">Ativo</option>
