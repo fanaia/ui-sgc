@@ -71,7 +71,7 @@ const AtividadeEdit = () => {
         <Form.Label>Data de Realização</Form.Label>
         <FormControl
           type="date"
-          value={atividade?.dataRealizacao}
+          value={atividade?.dataRealizacao?.substring(0, 10)}
           onChange={(e) => setAtividade({ ...atividade, dataRealizacao: e.target.value })}
         />
       </Form.Group>

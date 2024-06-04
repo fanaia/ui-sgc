@@ -26,7 +26,7 @@ const MovimentacaoFinanceiraCard = ({ item }) => {
         </Card.Text>
         <Card.Text>
           <strong>Tipo de Movimentação: </strong>
-          {item?.tipoMovimentacao}
+          {item?.tipoMovimentacao === 1 ? "Receber" : "Pagar"}
         </Card.Text>
         <Card.Text>
           <strong>Chave Pix Transação: </strong>

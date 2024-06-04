@@ -117,8 +117,7 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       </Form.Group>
       <Form.Group>
         <Form.Label>Tipo de Movimentação</Form.Label>
-        <FormControl
-          type="number"
+        <Form.Select
           value={movimentacaoFinanceira?.tipoMovimentacao}
           onChange={(e) =>
             setMovimentacaoFinanceira({
@@ -126,7 +125,11 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
               tipoMovimentacao: e.target.value,
             })
           }
-        />
+        >
+          <option></option>
+          <option value="1">Receber</option>
+          <option value="-1">Pagar</option>
+        </Form.Select>
       </Form.Group>
       <Form.Group>
         <Form.Label>Chave Pix Transação</Form.Label>
@@ -165,9 +168,9 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
         <Form.Label>Data da Transação</Form.Label>
         <FormControl
           type="date"
-          value={movimentacaoFinanceira?.dataTransação}
+          value={movimentacaoFinanceira?.dataTransacao?.substring(0, 10)}
           onChange={(e) =>
-            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, dataTransação: e.target.value })
+            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, dataTransacao: e.target.value })
           }
         />
       </Form.Group>

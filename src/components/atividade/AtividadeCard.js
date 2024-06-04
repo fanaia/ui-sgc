@@ -25,6 +25,10 @@ const AtividadeCard = ({ item }) => {
           {item?.totalHoras}h
         </Card.Text>
         <Card.Text>
+          <strong>Data Realização: </strong>
+          {item?.dataRealizacao}
+        </Card.Text>
+        <Card.Text>
           <strong>Status: </strong>
           {item?.status}
         </Card.Text>
