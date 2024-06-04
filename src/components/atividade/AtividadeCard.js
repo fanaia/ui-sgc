@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import StyledCard from "../common/StyledCard";
 import Etiqueta from "../common/Etiqueta";
-import { dataExibicao } from "../../utils/formatDate";
+import { formatData, formatToken } from "../../utils/displayFormatters";
 
 const AtividadeCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
@@ -23,11 +23,15 @@ const AtividadeCard = ({ item }) => {
         </Card.Text>
         <Card.Text>
           <strong>Total de Horas: </strong>
-          {item?.totalHoras}h
+          {item?.totalHoras} hrs
+        </Card.Text>
+        <Card.Text>
+          <strong>Total Tokens: </strong>
+          {formatToken(item?.totalTokens)}
         </Card.Text>
         <Card.Text>
           <strong>Data Realização: </strong>
-          {dataExibicao(item?.dataRealizacao)}
+          {formatData(item?.dataRealizacao)}
         </Card.Text>
         <Card.Text>
           <strong>Status: </strong>
