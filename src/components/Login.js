@@ -21,7 +21,7 @@ const Login = () => {
       navigate("/auth/home");
     } catch (error) {
       setMsg(error.message);
-      console.log(error.message);
+      console.log(error);
     }
   };
 

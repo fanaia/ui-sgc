@@ -2,6 +2,7 @@ import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
+import StatusSelect from "../common/StatusSelect";
 
 const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
@@ -56,6 +57,7 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
             setGrupoTrabalho({ ...grupoTrabalho, participanteResponsavel: e.target.value })
           }
         >
+          <option></option>
           {participantes.map((participante) => (
             <option key={participante._id} value={participante._id}>
               {participante.nome}
@@ -63,19 +65,10 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Status</Form.Label>
-        <Form.Select
-          id="status"
-          value={grupoTrabalho?.status}
-          onChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, status: e.target.value })}
-        >
-          <option value="pendente">Pendente</option>
-          <option value="ativo">Ativo</option>
-          <option value="recusado">Recusado</option>
-          <option value="cancelado">Cancelado</option>
-        </Form.Select>
-      </Form.Group>
+      <StatusSelect
+        status={grupoTrabalho?.status}
+        handleStatusChange={(e) => setGrupoTrabalho({ ...grupoTrabalho, status: e.target.value })}
+      />
     </Form>
   );
 });
