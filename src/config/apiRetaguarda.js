@@ -2,8 +2,8 @@ import axios from "axios";
 
 const apiRetaguarda = axios.create({
   // baseURL: "http://192.168.18.13:3010/api",
-  // baseURL: "http://127.0.0.1:3010/api",
-  baseURL: "https://retaguarda.pixconta.fanaia.com/api",
+  baseURL: "http://127.0.0.1:3010/api",
+  // baseURL: "https://retaguarda.pixconta.fanaia.com/api",
 });
 
 apiRetaguarda.interceptors.request.use((config) => {
