@@ -5,8 +5,8 @@ import { CrudProvider } from "../contexts/CrudContext";
 import apiRetaguarda from "../config/apiRetaguarda";
 import ListItem from "../components/crud/ListItem";
 import EditModal from "../components/crud/EditModal";
-import ParticipanteCard from "../components/participant/ParticipanteCard";
-import ParticipanteEdit from "../components/participant/ParticipanteEdit";
+import ParticipanteCard from "../components/participante/ParticipanteCard";
+import ParticipanteEdit from "../components/participante/ParticipanteEdit";
 
 const ParticipantesPage = () => {
   const { addMessage } = useContext(MessageContext);
