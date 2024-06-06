@@ -6,9 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import ProjetosPage from "./pages/ProjetosPage";
 import ConsensoPage from "./pages/ConsensoPage";
 import ParticipantesPage from "./pages/ParticipantesPage";
-import FinanceiroPage from "./pages/FinanceiroPage";
 import MovimentacaoFinanceiraPage from "./pages/MovimentacaoFinanceiraPage";
-import CarteiraPage from "./pages/carteira/CarteiraPage";
 import AtividadesPage from "./pages/AtividadesPage";
 import GruposTrabalhoPage from "./pages/GruposTrabalhoPage";
 import HomePage from "./pages/HomePage";
@@ -31,22 +29,14 @@ const App = () => {
                 <MessageDisplay />
                 <Routes>
                   <Route path="/home" element={<HomePage />} />
-                  <Route path="/carteira" element={<CarteiraPage />} />
                   <Route path="/consenso" element={<ConsensoPage />} />
                   <Route path="/atividades" element={<AtividadesPage />} />
-                  <Route
-                    path="/participantes"
-                    element={<ParticipantesPage />}
-                  />
-                  <Route path="/financeiro" element={<FinanceiroPage />} />
+                  <Route path="/participantes" element={<ParticipantesPage />} />
                   <Route
                     path="/movimentacoes-financeiras"
                     element={<MovimentacaoFinanceiraPage />}
                   />
-                  <Route
-                    path="/grupos-trabalho"
-                    element={<GruposTrabalhoPage />}
-                  />
+                  <Route path="/grupos-trabalho" element={<GruposTrabalhoPage />} />
                   <Route path="/projetos" element={<ProjetosPage />} />
                 </Routes>
               </>

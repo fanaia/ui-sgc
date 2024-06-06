@@ -1,10 +1,8 @@
 import axios from "axios";
 
 const apiRetaguarda = axios.create({
-  baseURL: process.env.MS_RETAGUARDA,
+  baseURL: process.env.REACT_APP_MS_RETAGUARDA,
 });
-
-console.log("process.env.MS_RETAGUARDA", process.env.REACT_APP_MS_RETAGUARDA)
 
 apiRetaguarda.interceptors.request.use((config) => {
   const tokenJwt = localStorage.getItem("tokenJwt");
