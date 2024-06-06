@@ -28,6 +28,10 @@ const ParticipanteCard = ({ item }) => {
           {tokenHoraMap[item?.tokenHora]}
         </Card.Text>
         <Card.Text>
+          <strong>Peso Consenso: </strong>
+          {item?.pesoConsenso}
+        </Card.Text>
+        <Card.Text>
           <strong>Status: </strong>
           {item?.status}
         </Card.Text>
