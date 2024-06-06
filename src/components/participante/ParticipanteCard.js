@@ -24,7 +24,7 @@ const ParticipanteCard = ({ item }) => {
       <Card.Header>{item?.nome}</Card.Header>
       <Card.Body>
         <Card.Text>
-          <strong>Valor hora: </strong>
+          <strong>Estágio: </strong>
           {tokenHoraMap[item?.tokenHora]}
         </Card.Text>
         <Card.Text>

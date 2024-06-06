@@ -62,7 +62,7 @@ const ParticipanteEdit = () => {
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Token por Hora:</Form.Label>
+        <Form.Label>Estágio (Token por Hora):</Form.Label>
         <Form.Select
           value={participante?.tokenHora}
           onChange={(e) => setParticipante({ ...participante, tokenHora: e.target.value })}
