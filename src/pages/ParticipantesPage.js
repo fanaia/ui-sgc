@@ -15,7 +15,7 @@ const ParticipantesPage = () => {
   useEffect(() => {
     fetchItens();
   }, []);
-
+ 
   const fetchItens = async () => {
     const response = await apiRetaguarda.get("participantes");
     setParticipantes(response.data);

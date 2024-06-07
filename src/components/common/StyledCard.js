@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Card } from "react-bootstrap";
 
 const StyledCard = ({ item, children, onClick }) => {
   const statusColors = {
@@ -9,8 +9,13 @@ const StyledCard = ({ item, children, onClick }) => {
     recusado: "red",
   };
 
-  const cardOpacity =
-    item?.status === "cancelado" || item?.status === "recusado" ? 0.7 : 1;
+  const [borderColor, setBorderColor] = useState(statusColors[item?.status] || "grey");
+
+  useEffect(() => {
+    setBorderColor(statusColors[item?.status] || "grey");
+  }, [item?.status]);
+
+  const cardOpacity = item?.status === "cancelado" || item?.status === "recusado" ? 0.6 : 1;
 
   return (
     <Card
@@ -20,7 +25,7 @@ const StyledCard = ({ item, children, onClick }) => {
         margin: "10px auto",
         cursor: "pointer",
         opacity: cardOpacity,
-        borderBottom: `10px solid ${statusColors[item?.status] || "grey"}`,
+        borderBottom: `10px solid ${borderColor}`,
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
       }}
       onClick={onClick}

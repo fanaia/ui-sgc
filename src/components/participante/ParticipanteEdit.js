@@ -76,7 +76,8 @@ const ParticipanteEdit = () => {
         </Form.Select>
       </Form.Group>
       <StatusSelect
-        status={participante?.status}
+        model="participante"
+        object={participante}
         handleStatusChange={(e) => setParticipante({ ...participante, status: e.target.value })}
       />
     </Form>
