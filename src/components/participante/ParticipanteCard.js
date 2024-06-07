@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Card } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import StyledCard from "../common/StyledCard";
@@ -6,6 +6,7 @@ import StatusSelect from "../common/StatusSelect";
 
 const ParticipanteCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
+  const [status, setStatus] = useState(item?.status);
 
   const handleSelect = () => {
     setSelectedItem(item);
@@ -21,7 +22,7 @@ const ParticipanteCard = ({ item }) => {
   };
 
   return (
-    <StyledCard item={item} onClick={handleSelect}>
+    <StyledCard item={item} status={item.status} onClick={handleSelect}>
       <Card.Header>{item?.nome}</Card.Header>
 
       <Card.Body>
@@ -47,4 +48,3 @@ const ParticipanteCard = ({ item }) => {
 };
 
 export default ParticipanteCard;
- 

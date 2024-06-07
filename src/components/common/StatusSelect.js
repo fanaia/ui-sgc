@@ -1,15 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Form } from "react-bootstrap";
-import {
-  HandThumbsUp,
-  HandThumbsDown,
-} from "react-bootstrap-icons";
+import { HandThumbsUp, HandThumbsDown } from "react-bootstrap-icons";
 import apiRetaguarda from "../../config/apiRetaguarda";
 import MessageContext from "../../contexts/MessageContext";
+import StatusContext from "../../contexts/StatusContext";
 
 const StatusSelect = ({ label, router, object }) => {
   const { addMessage } = useContext(MessageContext);
-  const [status, setStatus] = useState("pendente");
+  const { status, setStatus } = useContext(StatusContext);
 
   useEffect(() => {
     if (object?.status === undefined) {
