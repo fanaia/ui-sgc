@@ -141,7 +141,6 @@ const AtividadeEdit = () => {
               onChange={(e) => setAtividade({ ...atividade, dataRealizacao: e.target.value })}
             />
           </Form.Group>
-
           <Form.Group>
             <Form.Label>Total de Horas</Form.Label>
             <FormControl
@@ -150,11 +149,6 @@ const AtividadeEdit = () => {
               onChange={(e) => setAtividade({ ...atividade, totalHoras: e.target.value })}
             />
           </Form.Group>
-
-          <StatusSelect
-            status={atividade?.status}
-            handleStatusChange={(e) => setAtividade({ ...atividade, status: e.target.value })}
-          />
         </Form>
       )}
     </>

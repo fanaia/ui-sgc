@@ -37,3 +37,4 @@ const GrupoTrabalhoCard = ({ item }) => {
 };
 
 export default GrupoTrabalhoCard;
+ 

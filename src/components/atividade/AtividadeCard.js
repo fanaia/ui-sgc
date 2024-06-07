@@ -4,6 +4,7 @@ import CrudContext from "../../contexts/CrudContext";
 import StyledCard from "../common/StyledCard";
 import Etiqueta from "../common/Etiqueta";
 import { formatData, formatToken } from "../../utils/displayFormatters";
+import StatusSelect from "../common/StatusSelect";
 
 const AtividadeCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
@@ -16,7 +17,11 @@ const AtividadeCard = ({ item }) => {
   return (
     <StyledCard item={item} onClick={handleSelect}>
       <Card.Header>{item?.descricao}</Card.Header>
+
       <Card.Body>
+      
+      <div style={{ display: "flex" }}>
+          <div style={{ flex: 3, overflow: "auto" }}>
         <Card.Text>
           <strong>Participante: </strong>
           {item.participante?.nome}
@@ -33,11 +38,15 @@ const AtividadeCard = ({ item }) => {
           <strong>Data Realização: </strong>
           {formatData(item?.dataRealizacao)}
         </Card.Text>
-        <Card.Text>
-          <strong>Status: </strong>
-          {item?.status}
-        </Card.Text>
+        </div>
+          <div style={{ flex: 1, textAlign: "right", overflow: "auto" }}>
+            <Card.Text>
+              <StatusSelect label={item.descricao} router="atividades" object={item} />
+            </Card.Text>
+          </div>
+        </div>
       </Card.Body>
+
       <Card.Footer>
         <Etiqueta
           label={item?.grupoTrabalho?.nome}
@@ -50,3 +59,4 @@ const AtividadeCard = ({ item }) => {
 };
 
 export default AtividadeCard;
+ 

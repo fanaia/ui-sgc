@@ -20,8 +20,7 @@ const Login = () => {
 
       navigate("/auth/home");
     } catch (error) {
-      setMsg(error.message);
-      console.log(error);
+      setMsg(error.response?.data);
     }
   };
 
@@ -41,21 +40,11 @@ const Login = () => {
               <form onSubmit={handleSubmit}>
                 <div className="form-group mb-4">
                   <label htmlFor="whatsapp">Whatsapp</label>
-                  <input
-                    type="whatsapp"
-                    id="whatsapp"
-                    name="whatsapp"
-                    className="form-control"
-                  />
+                  <input type="whatsapp" id="whatsapp" name="whatsapp" className="form-control" />
                 </div>
                 <div className="form-group mb-4">
                   <label htmlFor="senha">Senha</label>
-                  <input
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    className="form-control"
-                  />
+                  <input type="password" id="senha" name="senha" className="form-control" />
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">
                   Entrar

@@ -63,10 +63,6 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
           ))}
         </Form.Select>
       </Form.Group>
-      <StatusSelect
-        status={projeto?.status}
-        handleStatusChange={(e) => setProjeto({ ...projeto, status: e.target.value })}
-      />
     </Form>
   );
 });
