@@ -132,39 +132,6 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
         </Form.Select>
       </Form.Group>
       <Form.Group>
-        <Form.Label>Chave Pix Transação</Form.Label>
-        <FormControl
-          type="text"
-          value={movimentacaoFinanceira?.chavePixTransacao}
-          onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              chavePixTransacao: e.target.value,
-            })
-          }
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Origem</Form.Label>
-        <FormControl
-          type="text"
-          value={movimentacaoFinanceira?.origem}
-          onChange={(e) =>
-            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, origem: e.target.value })
-          }
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label className="mb-1">Destino</Form.Label>
-        <FormControl
-          type="text"
-          value={movimentacaoFinanceira?.destino}
-          onChange={(e) =>
-            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, destino: e.target.value })
-          }
-        />
-      </Form.Group>
-      <Form.Group>
         <Form.Label>Data da Transação</Form.Label>
         <FormControl
           type="date"
