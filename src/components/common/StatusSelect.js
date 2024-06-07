@@ -2,14 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import {
   HandThumbsUp,
-  HandThumbsUpFill,
   HandThumbsDown,
-  HandThumbsDownFill,
 } from "react-bootstrap-icons";
 import apiRetaguarda from "../../config/apiRetaguarda";
 import MessageContext from "../../contexts/MessageContext";
 
-const StatusSelect = ({ label, model, object }) => {
+const StatusSelect = ({ label, router, object }) => {
   const { addMessage } = useContext(MessageContext);
   const [status, setStatus] = useState("pendente");
 
@@ -25,7 +23,7 @@ const StatusSelect = ({ label, model, object }) => {
     event.stopPropagation();
 
     try {
-      await apiRetaguarda.put(`/${model}/${object._id}/approve/true`);
+      await apiRetaguarda.put(`/${router}/${object._id}/approve/true`);
       setStatus("ativo");
 
       addMessage("info", `${label} aprovado`);
@@ -38,7 +36,7 @@ const StatusSelect = ({ label, model, object }) => {
     event.stopPropagation();
 
     try {
-      await apiRetaguarda.put(`/${model}/${object._id}/approve/false`);
+      await apiRetaguarda.put(`/${router}/${object._id}/approve/false`);
       setStatus("recusado");
 
       addMessage("info", `${label} recusado`);

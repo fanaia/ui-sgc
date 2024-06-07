@@ -37,7 +37,7 @@ const ParticipanteCard = ({ item }) => {
           </div>
           <div style={{ flex: 1, textAlign: "right", overflow: "auto" }}>
             <Card.Text>
-              <StatusSelect label={item.nome} model="participantes" object={item} />
+              <StatusSelect label={item.nome} router="participantes" object={item} />
             </Card.Text>
           </div>
         </div>
@@ -47,3 +47,4 @@ const ParticipanteCard = ({ item }) => {
 };
 
 export default ParticipanteCard;
+ 

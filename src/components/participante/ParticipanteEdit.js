@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
-import StatusSelect from "../common/StatusSelect";
 
 const ParticipanteEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
@@ -75,13 +74,9 @@ const ParticipanteEdit = () => {
           ))}
         </Form.Select>
       </Form.Group>
-      <StatusSelect
-        model="participante"
-        object={participante}
-        handleStatusChange={(e) => setParticipante({ ...participante, status: e.target.value })}
-      />
     </Form>
   );
 };
 
 export default ParticipanteEdit;
+ 
