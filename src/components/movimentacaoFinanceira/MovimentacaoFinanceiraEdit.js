@@ -174,12 +174,6 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           }
         />
       </Form.Group>
-      <StatusSelect
-        status={movimentacaoFinanceira?.status}
-        handleStatusChange={(e) =>
-          setMovimentacaoFinanceira({ ...movimentacaoFinanceira, status: e.target.value })
-        }
-      />
     </Form>
   );
 });
