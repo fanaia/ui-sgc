@@ -2,7 +2,6 @@ import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
-import StatusSelect from "../common/StatusSelect";
 
 const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
@@ -10,6 +9,8 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
   const [participantes, setParticipantes] = useState([]);
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [projetos, setProjetos] = useState([]);
+  
+  const _idAutenticado = localStorage.getItem("_id");
 
   useEffect(() => {
     setSelectedItem(movimentacaoFinanceira);
@@ -54,13 +55,14 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Participante</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.participante?._id}
+          value={movimentacaoFinanceira?.participante?._id || _idAutenticado}
           onChange={(e) =>
             setMovimentacaoFinanceira({
               ...movimentacaoFinanceira,
               participante: e.target.value,
             })
           }
+          disabled
         >
           <option></option>
           {participantes.map((participante) => (

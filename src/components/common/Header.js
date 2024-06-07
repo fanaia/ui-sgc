@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 
 const Header = () => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false); 
+  const nome = localStorage.getItem("nome");
 
   return (
     <header style={{ marginBottom: "10px" }}>
@@ -20,7 +21,7 @@ const Header = () => {
           style={{ paddingLeft: "1rem" }}
           onClick={() => setExpanded(false)}
         >
-          CS pix-conta
+          CS pix-conta ({nome})
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse

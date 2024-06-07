@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl, ListGroup } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
-import StatusSelect from "../common/StatusSelect";
 
 const AtividadeEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
@@ -11,6 +10,8 @@ const AtividadeEdit = () => {
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [projetos, setProjetos] = useState([]);
   const [step, setStep] = useState(selectedItem ? 3 : 1);
+
+  const _idAutenticado = localStorage.getItem("_id");
 
   useEffect(() => {
     setSelectedItem(atividade);
@@ -89,13 +90,14 @@ const AtividadeEdit = () => {
           <Form.Group>
             <Form.Label>Participante</Form.Label>
             <Form.Select
-              value={atividade?.participante?._id}
+              value={atividade?.participante?._id || _idAutenticado}
               onChange={(e) =>
                 setAtividade({
                   ...atividade,
                   participante: e.target.value,
                 })
               }
+              disabled
             >
               <option></option>
               {participantes.map((participante) => (

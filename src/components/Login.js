@@ -15,8 +15,9 @@ const Login = () => {
 
     try {
       const response = await apiRetaguarda.post("/login", { whatsapp, senha });
-      const tokenJwt = response.data.tokenJwt;
-      localStorage.setItem("tokenJwt", tokenJwt);
+      localStorage.setItem("tokenJwt", response.data.tokenJwt);
+      localStorage.setItem("_id", response.data._id);
+      localStorage.setItem("nome", response.data.nome);
 
       navigate("/auth/home");
     } catch (error) {
