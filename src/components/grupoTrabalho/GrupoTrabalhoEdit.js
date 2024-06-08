@@ -1,9 +1,9 @@
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
 
-const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
+const GrupoTrabalhoEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
   const [grupoTrabalho, setGrupoTrabalho] = useState(selectedItem);
   const [participantes, setParticipantes] = useState([]);
@@ -66,6 +66,6 @@ const GrupoTrabalhoEdit = forwardRef(({ _id }, ref) => {
       </Form.Group>
     </Form>
   );
-});
+};
 
 export default GrupoTrabalhoEdit;

@@ -1,9 +1,9 @@
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
 
-const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
+const MovimentacaoFinanceiraEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
   const [movimentacaoFinanceira, setMovimentacaoFinanceira] = useState(selectedItem);
   const [participantes, setParticipantes] = useState([]);
@@ -145,6 +145,6 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       </Form.Group>
     </Form>
   );
-});
+};
 
 export default MovimentacaoFinanceiraEdit;

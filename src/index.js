@@ -12,6 +12,7 @@ import GruposTrabalhoPage from "./pages/GruposTrabalhoPage";
 import HomePage from "./pages/HomePage";
 import { MessageProvider } from "./contexts/MessageContext"; // Import the provider
 import MessageDisplay from "./components/common/MessageDisplay";
+import StartPage from "./pages/StartPage";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -21,6 +22,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/semente" element={<StartPage />} />
           <Route
             path="/auth/*"
             element={
