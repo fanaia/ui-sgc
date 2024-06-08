@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
-import Etiqueta from "../common/Etiqueta";
 import StyledCard from "../common/StyledCard";
+import StatusSelect from "../common/StatusSelect";
 
 const GrupoTrabalhoCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
@@ -13,20 +13,28 @@ const GrupoTrabalhoCard = ({ item }) => {
   };
 
   return (
-    <StyledCard item={item} onClick={handleSelect} >
-      <Card.Header style={{ backgroundColor: item?.corEtiqueta, color: 'black' }}>{item?.nome}</Card.Header>
+    <StyledCard item={item} onClick={handleSelect}>
+      <Card.Header style={{ backgroundColor: item?.corEtiqueta, color: "black" }}>
+        {item?.nome}
+      </Card.Header>
       <Card.Body>
-        <Card.Text>
-          <strong>Responsável: </strong>
-          {item.participanteResponsavel?.nome}
-        </Card.Text>
-        <Card.Text>
-          <strong>Status: </strong>
-          {item?.status}
-        </Card.Text>
+        <div style={{ display: "flex" }}>
+          <div style={{ flex: 3, overflow: "auto" }}>
+            <Card.Text>
+              <strong>Responsável: </strong>
+              {item.participanteResponsavel?.nome}
+            </Card.Text>
+          </div>
+          <div style={{ flex: 1, textAlign: "right", overflow: "auto" }}>
+            <Card.Text>
+              <StatusSelect label={item.nome} router="grupos-trabalho" object={item} />
+            </Card.Text>
+          </div>
+        </div>
       </Card.Body>
     </StyledCard>
   );
 };
 
 export default GrupoTrabalhoCard;
+ 

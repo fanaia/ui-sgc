@@ -2,7 +2,6 @@ import React, { forwardRef, useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
-import StatusSelect from "../common/StatusSelect";
 
 const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
@@ -10,6 +9,8 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
   const [participantes, setParticipantes] = useState([]);
   const [gruposTrabalho, setGruposTrabalho] = useState([]);
   const [projetos, setProjetos] = useState([]);
+  
+  const _idAutenticado = localStorage.getItem("_id");
 
   useEffect(() => {
     setSelectedItem(movimentacaoFinanceira);
@@ -54,13 +55,14 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
       <Form.Group>
         <Form.Label>Participante</Form.Label>
         <Form.Select
-          value={movimentacaoFinanceira?.participante?._id}
+          value={movimentacaoFinanceira?.participante?._id || _idAutenticado}
           onChange={(e) =>
             setMovimentacaoFinanceira({
               ...movimentacaoFinanceira,
               participante: e.target.value,
             })
           }
+          disabled
         >
           <option></option>
           {participantes.map((participante) => (
@@ -132,39 +134,6 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
         </Form.Select>
       </Form.Group>
       <Form.Group>
-        <Form.Label>Chave Pix Transação</Form.Label>
-        <FormControl
-          type="text"
-          value={movimentacaoFinanceira?.chavePixTransacao}
-          onChange={(e) =>
-            setMovimentacaoFinanceira({
-              ...movimentacaoFinanceira,
-              chavePixTransacao: e.target.value,
-            })
-          }
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Origem</Form.Label>
-        <FormControl
-          type="text"
-          value={movimentacaoFinanceira?.origem}
-          onChange={(e) =>
-            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, origem: e.target.value })
-          }
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label className="mb-1">Destino</Form.Label>
-        <FormControl
-          type="text"
-          value={movimentacaoFinanceira?.destino}
-          onChange={(e) =>
-            setMovimentacaoFinanceira({ ...movimentacaoFinanceira, destino: e.target.value })
-          }
-        />
-      </Form.Group>
-      <Form.Group>
         <Form.Label>Data da Transação</Form.Label>
         <FormControl
           type="date"
@@ -174,12 +143,6 @@ const MovimentacaoFinanceiraEdit = forwardRef(({ _id }, ref) => {
           }
         />
       </Form.Group>
-      <StatusSelect
-        status={movimentacaoFinanceira?.status}
-        handleStatusChange={(e) =>
-          setMovimentacaoFinanceira({ ...movimentacaoFinanceira, status: e.target.value })
-        }
-      />
     </Form>
   );
 });

@@ -4,6 +4,7 @@ import CrudContext from "../../contexts/CrudContext";
 import Etiqueta from "../common/Etiqueta";
 import StyledCard from "../common/StyledCard";
 import { formatData, formatMoeda } from "../../utils/displayFormatters";
+import StatusSelect from "../common/StatusSelect";
 
 const MovimentacaoFinanceiraCard = ({ item }) => {
   const { setSelectedItem, setShowModal } = useContext(CrudContext);
@@ -17,38 +18,27 @@ const MovimentacaoFinanceiraCard = ({ item }) => {
     <StyledCard item={item} onClick={handleSelect}>
       <Card.Header>{item?.descricao}</Card.Header>
       <Card.Body>
-        <Card.Text>
-          <strong>Participante: </strong>
-          {item.participante?.nome}
-        </Card.Text>
-        <Card.Text>
-          <strong>Valor: </strong>
-          {formatMoeda(item?.valor)}
-        </Card.Text>
-        <Card.Text>
-          <strong>Tipo de Movimentação: </strong>
-          {item?.tipoMovimentacao === 1 ? "Receber" : "Pagar"}
-        </Card.Text>
-        <Card.Text>
-          <strong>Chave Pix Transação: </strong>
-          {item?.chavePixTransacao}
-        </Card.Text>
-        <Card.Text>
-          <strong>Origem: </strong>
-          {item?.origem}
-        </Card.Text>
-        <Card.Text>
-          <strong>Destino: </strong>
-          {item?.destino}
-        </Card.Text>
-        <Card.Text>
-          <strong>Data da Transação: </strong>
-          {formatData(item?.dataTransacao)}
-        </Card.Text>
-        <Card.Text>
-          <strong>Status: </strong>
-          {item?.status}
-        </Card.Text>
+        <div style={{ display: "flex" }}>
+          <div style={{ flex: 3, overflow: "auto" }}>
+            <Card.Text>
+              <strong>Participante: </strong>
+              {item.participante?.nome}
+            </Card.Text>
+            <Card.Text>
+              <strong>{item?.tipoMovimentacao === 1 ? "Recebeu" : "Pagou"}: </strong>
+              {formatMoeda(item?.valor)}
+            </Card.Text>
+            <Card.Text>
+              <strong>Data da Transação: </strong>
+              {formatData(item?.dataTransacao)}
+            </Card.Text>
+          </div>
+          <div style={{ flex: 1, textAlign: "right", overflow: "auto" }}>
+            <Card.Text>
+              <StatusSelect label={item.descricao} router="movimentacoes-financeiras" object={item} />
+            </Card.Text>
+          </div>
+        </div>
       </Card.Body>
       <Card.Footer>
         <Etiqueta

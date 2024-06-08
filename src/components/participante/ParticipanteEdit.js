@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
-import StatusSelect from "../common/StatusSelect";
 
 const ParticipanteEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
@@ -62,7 +61,7 @@ const ParticipanteEdit = () => {
         />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Token por Hora:</Form.Label>
+        <Form.Label>Estágio (Token por Hora):</Form.Label>
         <Form.Select
           value={participante?.tokenHora}
           onChange={(e) => setParticipante({ ...participante, tokenHora: e.target.value })}
@@ -75,12 +74,9 @@ const ParticipanteEdit = () => {
           ))}
         </Form.Select>
       </Form.Group>
-      <StatusSelect
-        status={participante?.status}
-        handleStatusChange={(e) => setParticipante({ ...participante, status: e.target.value })}
-      />
     </Form>
   );
 };
 
 export default ParticipanteEdit;
+ 
