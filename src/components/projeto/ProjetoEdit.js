@@ -1,10 +1,9 @@
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Form, FormControl } from "react-bootstrap";
 import CrudContext from "../../contexts/CrudContext";
 import apiRetaguarda from "../../config/apiRetaguarda";
-import StatusSelect from "../common/StatusSelect";
 
-const ProjetoEdit = forwardRef(({ _id }, ref) => {
+const ProjetoEdit = () => {
   const { selectedItem, setSelectedItem } = useContext(CrudContext);
   const [projeto, setProjeto] = useState(selectedItem);
   const [participantes, setParticipantes] = useState([]);
@@ -65,6 +64,6 @@ const ProjetoEdit = forwardRef(({ _id }, ref) => {
       </Form.Group>
     </Form>
   );
-});
+};
 
 export default ProjetoEdit;
