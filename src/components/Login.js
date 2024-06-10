@@ -22,7 +22,7 @@ const Login = () => {
       localStorage.setItem("_id", response.data._id);
       localStorage.setItem("nome", response.data.nome);
 
-      navigate("/auth/home");
+      navigate("./auth/home");
     } catch (error) {
       setMsg(error.response?.data);
     }

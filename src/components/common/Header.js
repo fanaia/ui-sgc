@@ -5,6 +5,7 @@ import { Navbar, Nav } from "react-bootstrap";
 const Header = () => {
   const [expanded, setExpanded] = useState(false); 
   const nome = localStorage.getItem("nome");
+  const contratoSocial = localStorage.getItem("contratoSocial");
 
   return (
     <header style={{ marginBottom: "10px" }}>
@@ -17,11 +18,11 @@ const Header = () => {
       >
         <Navbar.Brand
           as={Link}
-          to="/auth/home"
+          to="./home"
           style={{ paddingLeft: "1rem" }}
           onClick={() => setExpanded(false)}
         >
-          CS pix-conta ({nome})
+          cs-{contratoSocial} ({nome})
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse
@@ -29,63 +30,42 @@ const Header = () => {
           style={{ paddingLeft: "1rem" }}
         >
           <Nav>
-            {/* <Nav.Link
-              as={Link}
-              to="/auth/carteira"
-              onClick={() => setExpanded(false)}
-            >
-              Carteira
-            </Nav.Link> */}
-            {/* <Nav.Link
-              as={Link}
-              to="/auth/consenso"
-              onClick={() => setExpanded(false)}
-            >
-              Consenso
-            </Nav.Link> */}
             <Nav.Link
               as={Link}
-              to="/auth/atividades"
+              to="./atividades"
               onClick={() => setExpanded(false)}
             >
               Atividades
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/auth/movimentacoes-financeiras"
+              to="./movimentacoes-financeiras"
               onClick={() => setExpanded(false)}
             >
               Movimentações Financeiras
             </Nav.Link>
-            {/* <Nav.Link
-              as={Link}
-              to="/auth/financeiro"
-              onClick={() => setExpanded(false)}
-            >
-              Financeiro
-            </Nav.Link> */}
             <Nav.Link
               as={Link}
-              to="/auth/projetos"
+              to="./projetos"
               onClick={() => setExpanded(false)}
             >
               Projetos
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/auth/grupos-trabalho"
+              to="./grupos-trabalho"
               onClick={() => setExpanded(false)}
             >
               Grupos de Trabalho
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/auth/participantes"
+              to="./participantes"
               onClick={() => setExpanded(false)}
             >
               Participantes
             </Nav.Link>
-            <Nav.Link as={Link} to="/" onClick={() => setExpanded(false)}>
+            <Nav.Link as={Link} to="./" onClick={() => setExpanded(false)}>
               Sair
             </Nav.Link>
           </Nav>

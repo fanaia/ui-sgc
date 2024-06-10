@@ -2,23 +2,25 @@ import { Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import apiRetaguarda from "../config/apiRetaguarda";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const StartPage = () => {
   const { register, handleSubmit } = useForm();
   const [carregando, setCarregando] = useState(false);
 
+  const { contratoSocial } = useParams();
+  localStorage.setItem("contratoSocial", contratoSocial);
+
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setCarregando(true);
-    console.log(data);
 
     await apiRetaguarda
       .post("/createSeed", data)
       .then((response) => {
         alert(response.data);
-        navigate("/");
+        navigate("/" + contratoSocial);
       })
       .catch((error) => {
         alert("Erro ao iniciar a Seed", error.response?.data);
@@ -29,21 +31,26 @@ const StartPage = () => {
 
   return (
     <Container>
-      <h1>Seed Contrato-Social</h1>
+      <h1>Seed Contrato-Social: {contratoSocial}</h1>
       <h2>OAD (Organização Autônoma Descentralizada)</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ display: "flex", flexDirection: "column", gap: "10px" }}
       >
+        <input
+          type="hidden"
+          {...register("identificador", { required: true })}
+          value={contratoSocial}
+        />
         <div>
           <label>Qual o nome da Organização?</label>
           <br />
-          <input {...register("contratoSocial", { required: true })} style={{ margin: "5px 0" }} />
+          <input {...register("nome", { required: true })} style={{ margin: "5px 0" }} />
         </div>
         <div>
           <label>Qual o nome do Token? (Moeda)</label>
           <br />
-          <input {...register("tokenNome", { required: true })} style={{ margin: "5px 0" }} />
+          <input {...register("token", { required: true })} style={{ margin: "5px 0" }} />
         </div>
         <div>
           <label>Qual a sigla da Moeda? (3 letras)</label>
