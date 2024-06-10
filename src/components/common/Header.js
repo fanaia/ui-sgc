@@ -65,7 +65,7 @@ const Header = () => {
             >
               Participantes
             </Nav.Link>
-            <Nav.Link as={Link} to="./" onClick={() => setExpanded(false)}>
+            <Nav.Link as={Link} to="./../" onClick={() => setExpanded(false)}>
               Sair
             </Nav.Link>
           </Nav>

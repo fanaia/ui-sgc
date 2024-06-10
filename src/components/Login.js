@@ -6,9 +6,9 @@ import apiRetaguarda from "../config/apiRetaguarda";
 const Login = () => {
   const [msg, setMsg] = useState();
   const navigate = useNavigate();
-  const { contratoSocial } = useParams();
+  const { identificador } = useParams();
 
-  localStorage.setItem("contratoSocial", contratoSocial);
+  localStorage.setItem("identificador", identificador);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +34,7 @@ const Login = () => {
         <div className="col-md-6">
           <div className="card mt-5 shadow-lg">
             <div className="card-body">
-              <h2 className="text-center mb-4">Contrato Social: {contratoSocial}</h2>
+              <h2 className="text-center mb-4">Contrato Social: {identificador}</h2>
               <h3 className="text-center mb-4">Autenticação</h3>
               {msg && (
                 <div className="alert alert-danger" role="alert">

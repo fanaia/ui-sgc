@@ -8,8 +8,8 @@ const StartPage = () => {
   const { register, handleSubmit } = useForm();
   const [carregando, setCarregando] = useState(false);
 
-  const { contratoSocial } = useParams();
-  localStorage.setItem("contratoSocial", contratoSocial);
+  const { identificador } = useParams();
+  localStorage.setItem("identificador", identificador);
 
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const StartPage = () => {
       .post("/createSeed", data)
       .then((response) => {
         alert(response.data);
-        navigate("/" + contratoSocial);
+        navigate("./../");
       })
       .catch((error) => {
         alert("Erro ao iniciar a Seed", error.response?.data);
@@ -31,7 +31,7 @@ const StartPage = () => {
 
   return (
     <Container>
-      <h1>Seed Contrato-Social: {contratoSocial}</h1>
+      <h1>Seed Contrato-Social: {identificador}</h1>
       <h2>OAD (Organização Autônoma Descentralizada)</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -40,7 +40,7 @@ const StartPage = () => {
         <input
           type="hidden"
           {...register("identificador", { required: true })}
-          value={contratoSocial}
+          value={identificador}
         />
         <div>
           <label>Qual o nome da Organização?</label>

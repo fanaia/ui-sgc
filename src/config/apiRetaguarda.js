@@ -6,13 +6,13 @@ const apiRetaguarda = axios.create({
 
 apiRetaguarda.interceptors.request.use((config) => {
   const tokenJwt = localStorage.getItem("tokenJwt");
-  const contratoSocial = localStorage.getItem("contratoSocial");
+  const identificador = localStorage.getItem("identificador");
 
   if (tokenJwt) {
     config.headers.Authorization = `Bearer ${tokenJwt}`;
   }
-  if (contratoSocial) {
-    config.headers.contratoSocial = contratoSocial;
+  if (identificador) {
+    config.headers.identificador = identificador;
   }
   return config;
 });

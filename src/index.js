@@ -23,10 +23,10 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<CSNaoInformadoPage />} />
-          <Route path="/:contratoSocial" element={<LoginPage />} />
-          <Route path="/:contratoSocial/seed" element={<StartPage />} />
+          <Route path="/:identificador" element={<LoginPage />} />
+          <Route path="/:identificador/seed" element={<StartPage />} />
           <Route
-            path="/:contratoSocial/auth/*"
+            path="/:identificador/auth/*"
             element={
               <>
                 <Header />
