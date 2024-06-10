@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import { MessageProvider } from "./contexts/MessageContext"; // Import the provider
 import MessageDisplay from "./components/common/MessageDisplay";
 import StartPage from "./pages/StartPage";
+import CSNaoInformadoPage from "./pages/CSNaoInformadoPage";
 
 const root = createRoot(document.getElementById("root"));
 
@@ -21,10 +22,11 @@ const App = () => {
     <MessageProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/seed" element={<StartPage />} />
+          <Route path="/" element={<CSNaoInformadoPage />} />
+          <Route path="/:contratoSocial" element={<LoginPage />} />
+          <Route path="/:contratoSocial/seed" element={<StartPage />} />
           <Route
-            path="/auth/*"
+            path="/:contratoSocial/auth/*"
             element={
               <>
                 <Header />
